@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Contact Us',
-  description: 'Contact PK Landscaping Service in Fargo, ND. Get a free estimate for lawn care, snow removal, paving, and more. Call (218) 264-4150.',
+  description: 'Contact PK Landscaping Service in Fargo, ND. Get a free estimate for lawn care, snow removal, paving, and more. Call (218) 979-1154.',
   path: '/contact',
 })
 
@@ -46,13 +46,13 @@ export default function ContactPage() {
                 <h2 className="font-heading font-bold text-pk-900 text-2xl mb-4">PK Landscaping Service</h2>
                 <ul className="space-y-4">
                   <li>
-                    <a href="tel:+12182644150" className="flex items-start gap-3 group">
+                    <a href="tel:+12189791154" className="flex items-start gap-3 group">
                       <div className="w-10 h-10 bg-pk-500/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-pk-500/20 transition-colors">
                         <Phone size={16} className="text-pk-500" />
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 uppercase tracking-widest mb-0.5">Phone</p>
-                        <p className="font-bold text-pk-900 group-hover:text-pk-500 transition-colors">(218) 264-4150</p>
+                        <p className="font-bold text-pk-900 group-hover:text-pk-500 transition-colors">(218) 979-1154</p>
                       </div>
                     </a>
                   </li>

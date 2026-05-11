@@ -107,8 +107,8 @@ export default function ServicePage({ params }: Props) {
               <div className="bg-pk-500 rounded-2xl p-6">
                 <p className="font-heading font-black text-white text-3xl mb-1">10% OFF</p>
                 <p className="text-white/90 text-sm mb-4">Your first service with PK Landscaping</p>
-                <a href="tel:+12182644150" className="block w-full bg-white text-pk-900 font-bold text-center py-3 rounded-lg hover:bg-gray-100 transition-colors">
-                  Call (218) 264-4150
+                <a href="tel:+12189791154" className="block w-full bg-white text-pk-900 font-bold text-center py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                  Call (218) 979-1154
                 </a>
               </div>
             </aside>

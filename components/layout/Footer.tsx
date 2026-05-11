@@ -39,7 +39,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-5">
-              Professional landscaping, snow removal, and outdoor services in Fargo, ND. Fully insured, bonded, and community-focused since 2019.
+              Professional landscaping, snow removal, and outdoor services in Fargo, ND. Fully insured, bonded, and community-focused since 2020.
             </p>
             <a
               href="https://facebook.com"
@@ -91,9 +91,9 @@ export default function Footer() {
             <h3 className="font-heading font-bold text-white text-xs tracking-widest uppercase mb-4">Contact</h3>
             <ul className="space-y-3 mb-6">
               <li>
-                <a href="tel:+12182644150" className="flex items-start gap-2.5 text-gray-400 hover:text-pk-500 transition-colors text-sm">
+                <a href="tel:+12189791154" className="flex items-start gap-2.5 text-gray-400 hover:text-pk-500 transition-colors text-sm">
                   <Phone size={14} className="mt-0.5 shrink-0 text-pk-500" />
-                  (218) 264-4150
+                  (218) 979-1154
                 </a>
               </li>
               <li>

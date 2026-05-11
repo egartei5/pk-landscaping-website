@@ -9,9 +9,9 @@ export default function AnnouncementBar() {
     <div className="bg-pk-900 text-white text-sm py-2 px-4 flex items-center justify-between relative z-50">
       <div className="flex items-center gap-2 mx-auto">
         <span className="text-gray-400">Have a question?</span>
-        <a href="tel:+12182644150" className="flex items-center gap-1.5 font-bold text-pk-500 hover:text-pk-400 transition-colors">
+        <a href="tel:+12189791154" className="flex items-center gap-1.5 font-bold text-pk-500 hover:text-pk-400 transition-colors">
           <Phone size={13} />
-          Call Now: (218) 264-4150
+          Call Now: (218) 979-1154
         </a>
       </div>
       <button

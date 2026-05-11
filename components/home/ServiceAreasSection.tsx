@@ -2,12 +2,20 @@ import SectionLabel from '@/components/ui/SectionLabel'
 import { MapPin } from 'lucide-react'
 
 const areas = [
-  'Fargo, ND', 'Argusville, ND', 'Barnesville, MN', 'Briarwood, ND',
-  'Casselton, ND', 'Dilworth, MN', 'Eglon Township, MN', 'Glyndon, MN',
-  'Glyndon, ND', 'Hawley, MN', 'Horace, ND', 'Kindred, ND',
-  'Mapleton, N', 'Mapleton, ND', 'Oakport Township, MN', 'Prosper, ND',
-  'Prairiewood, Fargo, ND', 'Reed Township, ND', 'Sabin, MN',
-  'Spring Prairie Township, MN', 'Stanley Township, ND', 'Hickson, ND',
+  { name: 'Fargo, ND', primary: true },
+  { name: 'Moorhead, MN', primary: true },
+  { name: 'West Fargo, ND', primary: true },
+  { name: 'Horace, ND', primary: true },
+  { name: 'Dilworth, MN', primary: true },
+  { name: 'Casselton, ND', primary: true },
+  { name: 'Mapleton, ND', primary: false },
+  { name: 'Kindred, ND', primary: false },
+  { name: 'Glyndon, MN', primary: false },
+  { name: 'Hawley, MN', primary: false },
+  { name: 'Barnesville, MN', primary: false },
+  { name: 'Sabin, MN', primary: false },
+  { name: 'Argusville, ND', primary: false },
+  { name: 'Prosper, ND', primary: false },
 ]
 
 export default function ServiceAreasSection() {
@@ -24,11 +32,18 @@ export default function ServiceAreasSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 mb-10">
           {areas.map((area) => (
-            <div key={area} className="flex items-center gap-1.5 text-sm text-gray-600 bg-pk-off-white px-3 py-2 rounded-lg">
-              <MapPin size={12} className="text-pk-500 shrink-0" />
-              <span className="truncate">{area}</span>
+            <div
+              key={area.name}
+              className={`flex items-center gap-1.5 text-sm px-3 py-2.5 rounded-lg border transition-colors ${
+                area.primary
+                  ? 'bg-pk-900 border-pk-700 text-white font-semibold'
+                  : 'bg-pk-off-white border-gray-200 text-gray-600'
+              }`}
+            >
+              <MapPin size={12} className={area.primary ? 'text-pk-400 shrink-0' : 'text-pk-500 shrink-0'} />
+              <span className="truncate">{area.name}</span>
             </div>
           ))}
         </div>

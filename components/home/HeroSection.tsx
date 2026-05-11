@@ -3,9 +3,16 @@ import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Phone, ChevronDown, Shield, Percent, Star } from 'lucide-react'
+import { Phone, ChevronDown, Shield, Star, Clock, BadgeCheck } from 'lucide-react'
 
-const words = ['Exceptional', 'Landscape', 'Services', 'Tailored', 'To', 'Your', 'Vision.']
+const words = ['Transforming', 'Fargo', 'Properties', 'Into', 'Beautiful', 'Outdoor', 'Spaces']
+
+const trustBadges = [
+  { icon: BadgeCheck, text: 'Locally Owned' },
+  { icon: Star, text: 'Free Estimates' },
+  { icon: Shield, text: 'Insured & Bonded' },
+  { icon: Clock, text: 'Fast Response' },
+]
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null)
@@ -18,7 +25,7 @@ export default function HeroSection() {
       <motion.div style={{ y: bgY }} className="absolute inset-0 scale-110">
         <Image
           src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&q=85"
-          alt="Beautiful landscaped property by PK Landscaping Service in Fargo ND"
+          alt="Beautiful landscaped property by PK Landscaping in Fargo-Moorhead"
           fill
           priority
           className="object-cover"
@@ -27,7 +34,7 @@ export default function HeroSection() {
       </motion.div>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-pk-900/65 via-pk-900/70 to-pk-950/95" />
+      <div className="absolute inset-0 bg-gradient-to-b from-pk-900/60 via-pk-900/72 to-pk-950/97" />
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
@@ -41,8 +48,8 @@ export default function HeroSection() {
           <div className="flex gap-0.5">
             {[...Array(5)].map((_, i) => <Star key={i} size={12} className="text-yellow-400 fill-yellow-400" />)}
           </div>
-          <span className="text-pk-500 font-heading font-bold text-xs tracking-widest uppercase">
-            Fargo&apos;s Top-Rated Landscaping Company
+          <span className="text-pk-400 font-heading font-bold text-xs tracking-widest uppercase">
+            Fargo-Moorhead&apos;s Top-Rated Landscaping Company
           </span>
         </motion.div>
 
@@ -56,7 +63,7 @@ export default function HeroSection() {
               transition={{ delay: 0.3 + i * 0.08, ease: 'easeOut' }}
               className="inline-block mr-[0.25em]"
             >
-              {word}
+              {i >= 5 ? <span className="text-pk-400">{word}</span> : word}
             </motion.span>
           ))}
         </h1>
@@ -68,7 +75,7 @@ export default function HeroSection() {
           transition={{ delay: 1.0 }}
           className="text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto mb-8 leading-relaxed"
         >
-          From overgrown lawns to icy walkways — we restore safety, beauty, and value to every property we touch.
+          Lawn care, snow removal, paver installation, tree services & more — serving Fargo, Moorhead, and surrounding communities.
         </motion.p>
 
         {/* CTAs */}
@@ -78,29 +85,25 @@ export default function HeroSection() {
           transition={{ delay: 1.1 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
         >
-          <Link href="/contact" className="btn-primary text-base px-8 py-4 w-full sm:w-auto">
+          <Link href="/contact" className="btn-primary text-base px-8 py-4 w-full sm:w-auto font-bold">
             Get Free Estimate →
           </Link>
-          <a href="tel:+12182644150" className="btn-outline text-base px-8 py-4 w-full sm:w-auto flex items-center justify-center gap-2">
-            <Phone size={16} /> (218) 264-4150
+          <a href="tel:+12189791154" className="btn-outline text-base px-8 py-4 w-full sm:w-auto flex items-center justify-center gap-2 font-bold">
+            <Phone size={16} /> Call Now: (218) 979-1154
           </a>
         </motion.div>
 
-        {/* Trust pills */}
+        {/* Trust badges */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="flex flex-wrap items-center justify-center gap-4"
+          className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
         >
-          {[
-            { icon: Shield, text: 'Insured & Bonded' },
-            { icon: Percent, text: '10% First-Time Discount' },
-            { icon: Star, text: 'Warranty Backed' },
-          ].map(({ icon: Icon, text }) => (
-            <div key={text} className="flex items-center gap-1.5 text-gray-400 text-sm">
-              <Icon size={13} className="text-pk-500" />
-              {text}
+          {trustBadges.map(({ icon: Icon, text }) => (
+            <div key={text} className="flex items-center gap-1.5 text-gray-300 text-sm">
+              <Icon size={14} className="text-pk-400" />
+              <span className="font-medium">{text}</span>
             </div>
           ))}
         </motion.div>

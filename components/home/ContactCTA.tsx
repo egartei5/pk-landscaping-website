@@ -27,13 +27,13 @@ export default function ContactCTA() {
             </p>
             <ul className="space-y-4">
               <li>
-                <a href="tel:+12182644150" className="flex items-center gap-3 text-gray-300 hover:text-pk-500 transition-colors">
+                <a href="tel:+12189791154" className="flex items-center gap-3 text-gray-300 hover:text-pk-500 transition-colors">
                   <div className="w-10 h-10 bg-pk-800 rounded-lg flex items-center justify-center shrink-0">
                     <Phone size={16} className="text-pk-500" />
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 uppercase tracking-widest">Call Us</p>
-                    <p className="font-bold">(218) 264-4150</p>
+                    <p className="font-bold">(218) 979-1154</p>
                   </div>
                 </a>
               </li>

@@ -105,9 +105,9 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <a href="tel:+12182644150" className="flex items-center gap-1.5 text-sm text-gray-300 hover:text-white transition-colors">
+            <a href="tel:+12189791154" className="flex items-center gap-1.5 text-sm text-gray-300 hover:text-white transition-colors">
               <Phone size={14} className="text-pk-500" />
-              (218) 264-4150
+              (218) 979-1154
             </a>
             <Link href="/contact" className="btn-primary text-sm px-5 py-2.5">
               Get Free Estimate
@@ -145,8 +145,8 @@ export default function Header() {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <a href="tel:+12182644150" className="flex items-center justify-center gap-2 text-white border border-pk-700 rounded-lg py-3 font-medium hover:bg-pk-800 transition-colors">
-              <Phone size={16} className="text-pk-500" /> (218) 264-4150
+            <a href="tel:+12189791154" className="flex items-center justify-center gap-2 text-white border border-pk-700 rounded-lg py-3 font-medium hover:bg-pk-800 transition-colors">
+              <Phone size={16} className="text-pk-500" /> (218) 979-1154
             </a>
             <Link href="/contact" className="btn-primary text-center py-3">
               Get Free Estimate

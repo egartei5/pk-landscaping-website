@@ -59,7 +59,7 @@ export default function FaqPage() {
             <h3 className="font-heading font-bold text-white text-2xl mb-2">Still Have Questions?</h3>
             <p className="text-gray-400 mb-6">Call us directly or send a message — we respond within one business day.</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href="tel:+12182644150" className="btn-primary">Call (218) 264-4150</a>
+              <a href="tel:+12189791154" className="btn-primary">Call (218) 979-1154</a>
               <Link href="/contact" className="btn-outline">Send a Message</Link>
             </div>
           </div>

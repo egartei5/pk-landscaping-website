@@ -82,13 +82,13 @@ export default function AboutPage() {
                   As a dedicated landscaping company, we focus on creating outdoor spaces that reflect our clients&apos; goals. From precise lawn mowing to custom paver installations, our services are crafted to elevate both aesthetics and usability.
                 </p>
                 <p className="text-gray-600 leading-relaxed">
-                  Experience the peace of mind that comes from working with an experienced team committed to customer satisfaction. In Fargo, ND, our company offers reliable expertise tailored to your needs. Contact us today at (218) 264-4150 — our team is ready to bring your project to life.
+                  Experience the peace of mind that comes from working with an experienced team committed to customer satisfaction. In Fargo, ND, our company offers reliable expertise tailored to your needs. Contact us today at (218) 979-1154 — our team is ready to bring your project to life.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/contact" className="btn-primary text-center">Get Free Estimate</Link>
-                <a href="tel:+12182644150" className="btn-outline-green text-center">Call (218) 264-4150</a>
+                <a href="tel:+12189791154" className="btn-outline-green text-center">Call (218) 979-1154</a>
               </div>
             </div>
 

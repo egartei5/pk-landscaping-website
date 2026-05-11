@@ -40,7 +40,7 @@ export function localBusinessSchema() {
     name: 'PK Landscaping Service',
     description: 'Professional landscaping, snow removal, road paving, and outdoor services in Fargo, ND.',
     url: BASE_URL,
-    telephone: '+12182644150',
+    telephone: '+12189791154',
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Fargo',

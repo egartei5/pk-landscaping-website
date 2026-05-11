@@ -14,6 +14,7 @@ import ServiceAreasSection from '@/components/home/ServiceAreasSection'
 import DiscountBanner from '@/components/home/DiscountBanner'
 import BlogPreview from '@/components/home/BlogPreview'
 import ContactCTA from '@/components/home/ContactCTA'
+import BeforeAfterSection from '@/components/home/BeforeAfterSection'
 
 export const revalidate = 3600
 
@@ -39,6 +40,7 @@ export default async function HomePage() {
       <WhyChooseUs />
       <ProcessSection />
       <TestimonialsCarousel testimonials={testimonials} />
+      <BeforeAfterSection />
       <ServiceAreasSection />
       <DiscountBanner />
       <BlogPreview posts={posts} />

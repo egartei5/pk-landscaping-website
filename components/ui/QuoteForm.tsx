@@ -10,6 +10,7 @@ const schema = z.object({
   phone: z.string().optional(),
   email: z.string().email('Valid email required'),
   service: z.string().optional(),
+  location: z.string().optional(),
   message: z.string().min(5, 'Please describe your project'),
 })
 
@@ -18,6 +19,11 @@ type FormData = z.infer<typeof schema>
 const serviceOptions = [
   'Snow Removal', 'Road Paving', 'Paver Installation', 'Lawn Mowing',
   'Tree Services', 'Brick Lane Construction', 'Gutter Cleaning', 'Seasonal Cleanup', 'Other',
+]
+
+const locationOptions = [
+  'Fargo, ND', 'Moorhead, MN', 'West Fargo, ND', 'Horace, ND',
+  'Dilworth, MN', 'Casselton, ND', 'Mapleton, ND', 'Other Area',
 ]
 
 interface QuoteFormProps {
@@ -44,7 +50,7 @@ export default function QuoteForm({ dark = false }: QuoteFormProps) {
       if (!res.ok) throw new Error('Failed')
       setSubmitted(true)
     } catch {
-      setError('Something went wrong. Please call us at (218) 264-4150.')
+      setError('Something went wrong. Please call us at (218) 979-1154.')
     }
   }
 
@@ -68,13 +74,22 @@ export default function QuoteForm({ dark = false }: QuoteFormProps) {
         </div>
         <div>
           <label className={labelClass}>Phone</label>
-          <input {...register('phone')} placeholder="(optional)" className={inputClass} />
+          <input {...register('phone')} placeholder="(218) 000-0000" className={inputClass} />
         </div>
       </div>
-      <div>
-        <label className={labelClass}>Email *</label>
-        <input {...register('email')} type="email" placeholder="your@email.com" className={inputClass} />
-        {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className={labelClass}>Email *</label>
+          <input {...register('email')} type="email" placeholder="your@email.com" className={inputClass} />
+          {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
+        </div>
+        <div>
+          <label className={labelClass}>Your Location</label>
+          <select {...register('location')} className={inputClass}>
+            <option value="">Select city...</option>
+            {locationOptions.map((l) => <option key={l} value={l}>{l}</option>)}
+          </select>
+        </div>
       </div>
       <div>
         <label className={labelClass}>Service Interested In</label>

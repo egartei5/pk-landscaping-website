@@ -198,7 +198,7 @@ export default async function BlogPostPage({ params }: Props) {
                 <p className="text-xs font-bold uppercase tracking-widest mb-1">Limited Offer</p>
                 <p className="font-heading text-3xl font-black mb-2">10% OFF</p>
                 <p className="text-sm text-white/90 mb-4">First-time customers. Mention this offer when you call.</p>
-                <a href="tel:+12182644150" className="block text-center bg-white text-pk-900 font-bold rounded-xl py-2.5 hover:bg-pk-50 transition-colors text-sm">
+                <a href="tel:+12189791154" className="block text-center bg-white text-pk-900 font-bold rounded-xl py-2.5 hover:bg-pk-50 transition-colors text-sm">
                   Call Now
                 </a>
               </div>
