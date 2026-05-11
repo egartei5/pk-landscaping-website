@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 const db = new PrismaClient()
 
 async function main() {
-  // Admin user
+  // Admin user (always upsert — safe to run multiple times)
   const passwordHash = await bcrypt.hash(process.env.ADMIN_SEED_PASSWORD ?? 'PkAdmin2024!Secure', 12)
   await db.adminUser.upsert({
     where: { email: process.env.ADMIN_SEED_EMAIL ?? 'admin@pklandscapingmn.com' },
@@ -14,6 +14,13 @@ async function main() {
       passwordHash,
     },
   })
+
+  // Skip testimonials + blog if already seeded
+  const existing = await db.testimonial.count()
+  if (existing > 0) {
+    console.log('✅ Database already seeded — skipping testimonials and blog posts.')
+    return
+  }
 
   // Testimonials
   const testimonials = [
