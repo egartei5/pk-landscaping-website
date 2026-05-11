@@ -8,11 +8,18 @@ const SERVICE_SLUGS = [
   'tree-services', 'brick-lane-construction', 'gutter-cleaning', 'seasonal-cleanup',
 ]
 
+export const dynamic = 'force-dynamic'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await db.blogPost.findMany({
-    where: { published: true },
-    select: { slug: true, updatedAt: true },
-  })
+  let posts: { slug: string; updatedAt: Date }[] = []
+  try {
+    posts = await db.blogPost.findMany({
+      where: { published: true },
+      select: { slug: true, updatedAt: true },
+    })
+  } catch {
+    // DB not available at build time
+  }
 
   const staticPages = [
     { url: BASE_URL, lastModified: new Date(), priority: 1.0, changeFrequency: 'weekly' as const },
