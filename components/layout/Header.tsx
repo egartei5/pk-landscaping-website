@@ -109,8 +109,11 @@ export default function Header() {
               <Phone size={14} className="text-pk-500" />
               (218) 979-1154
             </a>
+            <Link href="/book" className="text-sm px-4 py-2.5 border border-pk-500 text-pk-400 hover:bg-pk-500 hover:text-white rounded-lg font-semibold transition-colors">
+              Book Now
+            </Link>
             <Link href="/contact" className="btn-primary text-sm px-5 py-2.5">
-              Get Free Estimate
+              Free Estimate
             </Link>
           </div>
 
@@ -148,6 +151,9 @@ export default function Header() {
             <a href="tel:+12189791154" className="flex items-center justify-center gap-2 text-white border border-pk-700 rounded-lg py-3 font-medium hover:bg-pk-800 transition-colors">
               <Phone size={16} className="text-pk-500" /> (218) 979-1154
             </a>
+            <Link href="/book" className="text-center py-3 border border-pk-500 text-pk-400 rounded-lg font-semibold hover:bg-pk-500 hover:text-white transition-colors">
+              Book a Service
+            </Link>
             <Link href="/contact" className="btn-primary text-center py-3">
               Get Free Estimate
             </Link>

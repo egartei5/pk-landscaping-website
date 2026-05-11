@@ -2,10 +2,11 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
-import { LayoutDashboard, Mail, FileText, Star, Image, LogOut, Leaf, ExternalLink } from 'lucide-react'
+import { LayoutDashboard, Mail, FileText, Star, Image, LogOut, Leaf, ExternalLink, CalendarCheck } from 'lucide-react'
 
 const nav = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
+  { href: '/admin/bookings', label: 'Bookings', icon: CalendarCheck },
   { href: '/admin/leads', label: 'Leads', icon: Mail },
   { href: '/admin/blog', label: 'Blog', icon: FileText },
   { href: '/admin/testimonials', label: 'Testimonials', icon: Star },
