@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Script from 'next/script'
-import parse from 'html-react-parser'
-import DOMPurify from 'isomorphic-dompurify'
+import parse, { Element } from 'html-react-parser'
 import { Calendar, Clock, Tag, ArrowLeft } from 'lucide-react'
 import { db } from '@/lib/db'
 import { buildMetadata, blogPostingSchema } from '@/lib/seo'
@@ -49,11 +48,16 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) notFound()
 
-  const safe = DOMPurify.sanitize(post.content, {
-    ADD_TAGS: ['iframe'],
-    ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'],
-  })
   const jsonLd = blogPostingSchema(post)
+
+  // Strip script/object/embed tags from admin-authored content as a lightweight safety measure
+  const parseOptions = {
+    replace: (node: unknown) => {
+      if (node instanceof Element && ['script', 'object', 'embed', 'base'].includes(node.name)) {
+        return <></>
+      }
+    },
+  }
 
   return (
     <>
@@ -121,7 +125,7 @@ export default async function BlogPostPage({ params }: Props) {
                   prose-blockquote:border-pk-500 prose-blockquote:bg-pk-50/50 prose-blockquote:rounded-r-xl prose-blockquote:py-1
                 "
               >
-                {parse(safe)}
+                {parse(post.content, parseOptions)}
               </div>
 
               {/* CTA */}
