@@ -10,12 +10,20 @@ interface Props {
   params: { slug: string }
 }
 
+// Pages not pre-built at build time are rendered on first request and cached
+export const dynamicParams = true
+
 export async function generateStaticParams() {
-  const posts = await db.blogPost.findMany({
-    where: { published: true },
-    select: { slug: true },
-  })
-  return posts.map((p) => ({ slug: p.slug }))
+  try {
+    const posts = await db.blogPost.findMany({
+      where: { published: true },
+      select: { slug: true },
+    })
+    return posts.map((p) => ({ slug: p.slug }))
+  } catch {
+    // DB volume not mounted during build (e.g. Railway) — render pages on demand
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: Props) {
