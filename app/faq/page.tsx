@@ -5,16 +5,46 @@ import SectionLabel from '@/components/ui/SectionLabel'
 import Link from 'next/link'
 
 const faqs = [
-  { q: 'What types of properties do you service?', a: 'We specialize in both residential and commercial property care. Our team adapts landscaping strategies based on each site\'s size, layout, and intended function. Whether we\'re restoring curb appeal for a home or maintaining grounds for a business, we implement tailored solutions using our experience across diverse property types.' },
-  { q: 'What areas do you serve?', a: 'We provide comprehensive services throughout Fargo, ND and our established service area including Barnesville MN, Casselton ND, Dilworth MN, Glyndon MN, Hawley MN, Horace ND, Kindred ND, Mapleton ND, Moorhead MN, Reed Township ND, Sabin MN, Spring Prairie Township MN, and Stanley Township ND.' },
-  { q: 'How long have you been providing landscaping services?', a: 'Our experience spans over three years, with operations officially launched in 2019. Since then, we\'ve built a dedicated team focused on delivering long-term solutions for outdoor spaces. From lawn mowing to paver installations, our projects reflect consistent methodology, safety compliance, and client-focused operation.' },
-  { q: 'What professional credentials does your team hold?', a: 'As bonded and insured providers, we operate with full compliance under industry safety and service standards. Our team includes trained professionals skilled in equipment operation such as snow plows, mowing machines, and industry tools to deliver performance-based outcomes.' },
-  { q: 'How can I request an estimate?', a: 'You can request an estimate by contacting our team directly via phone or online inquiry. We offer free estimates as part of our first-client approach. During the consultation, we assess site-specific needs and recommend customized service plans that reflect your property\'s condition and desired outcome.' },
-  { q: 'What warranty options are available?', a: 'Warranty coverage depends on the scope of each job. In our practice, we evaluate the materials used, project complexity, and environmental exposure before outlining warranty terms. Some paver installations may include extended protection based on structural reinforcement processes implemented by our crew using specialized tools.' },
-  { q: 'What should I consider when planning a new landscaping design?', a: 'When designing a new landscape, it\'s essential to account for long-term maintenance needs, drainage patterns, sun exposure, and seasonal variations. We recommend balancing hardscape features with plant groupings suited to your soil type and climate conditions. This strategy enhances sustainability while aligning with professional landscape services design principles.' },
-  { q: 'How often should I schedule lawn maintenance?', a: 'A consistent schedule supports turf health through seasonal changes. In most cases, weekly or bi-weekly visits maintain optimal growth during peak seasons while preventing buildup of debris or pests in dormant periods. We tailor maintenance frequency based on grass species, irrigation systems, and soil health indicators observed during initial assessments.' },
-  { q: 'What factors can affect paver installation timeline?', a: 'Paver installation timelines depend on multiple variables: surface preparation depth, terrain leveling needs, material delivery schedules, and weather conditions all play roles. Our approach involves careful staging from excavation through compaction to ensure every layer meets durability benchmarks before proceeding to the next phase.' },
-  { q: 'How should I prepare for seasonal cleanups?', a: 'To prepare for seasonal cleanups, we recommend clearing access paths around key areas like garden beds or tree bases ahead of scheduled visits. Remove personal items such as furniture or decorations where possible so our team can operate efficiently with leaf blowers or rakes during procedures tailored to spring recovery or fall-leaf removal cycles.' },
+  {
+    q: 'What Types of Properties Do You Service?',
+    a: 'We specialize in both residential and commercial property care. Our team adapts landscaping strategies based on each site\'s size, layout, and intended function. Whether we\'re restoring curb appeal for a home or maintaining grounds for a business, we implement tailored solutions using our experience across diverse property types. This approach ensures functional beauty that lasts through all seasons.',
+  },
+  {
+    q: 'What Areas Do You Serve?',
+    a: 'We provide comprehensive services throughout the Fargo-Moorhead region, including Fargo ND, Moorhead MN, West Fargo ND, Horace ND, Dilworth MN, Casselton ND, Mapleton ND, Kindred ND, Argusville ND, Glyndon MN, Hawley MN, Barnesville MN, Sabin MN, Prosper ND, Prairiewood ND, Reed Township ND, and surrounding communities.',
+  },
+  {
+    q: 'How Long Has Your Company Been Providing Landscaping Services?',
+    a: 'Our experience spans over six years, with operations officially launched in 2020. Since then, we\'ve built a dedicated team focused on delivering long-term solutions for outdoor spaces. From lawn mowing to paver installations, our projects reflect consistent methodology backed by hands-on field expertise and client feedback integration.',
+  },
+  {
+    q: 'What Professional Credentials and Qualifications Does Your Team Hold?',
+    a: 'As bonded and insured providers, we operate with full compliance under industry safety and service standards. Our team includes trained professionals skilled in equipment operation — such as snow plows and mowing machines — and certified to deliver performance-based outcomes. We ensure every project follows professional landscape services guidelines from start to finish.',
+  },
+  {
+    q: 'How Can I Request an Estimate for My Landscaping or Lawn Care Project?',
+    a: 'You can request a free estimate by calling us at (218) 979-1154, filling out our online contact form, or using our online booking system at pklandscapingmn.com/book. During the consultation, we assess site-specific needs and recommend customized service plans that reflect your property\'s condition and desired outcome.',
+  },
+  {
+    q: 'What Warranty Options Are Available for Landscaping or Paver Projects?',
+    a: 'Warranty coverage depends on the scope of each job. We evaluate the materials used, project complexity, and environmental exposure before outlining warranty terms. Some paver installations may include extended protection based on structural reinforcement processes implemented by our crew using specialized tools.',
+  },
+  {
+    q: 'What Should I Consider When Planning a New Landscaping Design?',
+    a: 'When designing a new landscape, it\'s essential to account for long-term maintenance needs, drainage patterns, sun exposure, and seasonal variations. We recommend balancing hardscape features with plant groupings suited to your soil type and climate conditions. This strategy enhances sustainability while delivering lasting curb appeal.',
+  },
+  {
+    q: 'How Often Should I Schedule Lawn Maintenance to Keep My Yard Healthy?',
+    a: 'A consistent schedule supports turf health through seasonal changes. In most cases, weekly or bi-weekly visits maintain optimal growth during peak seasons while preventing buildup of debris or pests in dormant periods. We tailor maintenance frequency based on grass species, irrigation systems, and soil health indicators observed during initial assessments.',
+  },
+  {
+    q: 'What Factors Can Affect the Timeline of a Paver Installation Project?',
+    a: 'Paver installation timelines depend on multiple variables: surface preparation depth, terrain leveling needs, material delivery schedules, and weather conditions all play roles. Our approach involves careful staging — from excavation through compaction — to ensure every layer meets durability benchmarks before proceeding to the next phase.',
+  },
+  {
+    q: 'How Should I Prepare My Property for Seasonal Cleanups in Spring or Fall?',
+    a: 'To prepare for seasonal cleanups, we recommend clearing access paths around key areas like garden beds or tree bases ahead of scheduled visits. Remove personal items such as furniture or decorations where possible so our team can operate efficiently with leaf blowers or rakes during cleanup procedures tailored to spring recovery or fall leaf removal cycles.',
+  },
 ]
 
 export default function FaqPage() {
@@ -26,10 +56,10 @@ export default function FaqPage() {
         <div className="max-w-3xl mx-auto text-center">
           <SectionLabel>FAQ</SectionLabel>
           <h1 className="font-heading font-black text-white text-5xl sm:text-6xl mb-4">
-            Frequently Asked Questions
+            Landscape Maintenance FAQ
           </h1>
-          <p className="text-gray-400 text-lg">
-            Expert answers from our landscaping team in Fargo, ND.
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Expert answers from our team — serving the Fargo-Moorhead region with 6+ years of professional outdoor care.
           </p>
         </div>
       </div>
