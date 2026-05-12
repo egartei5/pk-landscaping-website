@@ -7,7 +7,6 @@ import { CheckCircle2 } from 'lucide-react'
 import { servicesData, getServiceBySlug } from '@/lib/services-data'
 import { buildMetadata, serviceSchema } from '@/lib/seo'
 import SectionLabel from '@/components/ui/SectionLabel'
-import QuoteForm from '@/components/ui/QuoteForm'
 
 interface Props { params: { slug: string } }
 
@@ -85,8 +84,10 @@ export default function ServicePage({ params }: Props) {
                 <h3 className="font-heading font-bold text-white text-2xl mb-2">
                   Ready to Get Started with {service.title}?
                 </h3>
-                <p className="text-gray-400 mb-6">Fill out this quick form and we&apos;ll get back to you within one business day.</p>
-                <QuoteForm dark />
+                <p className="text-gray-400 mb-6">Give us a call and we&apos;ll get you taken care of.</p>
+                <a href="tel:+12189791154" className="btn-primary inline-flex items-center gap-2">
+                  Call (218) 979-1154
+                </a>
               </div>
             </div>
 

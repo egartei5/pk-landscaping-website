@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Phone, MapPin, Clock, Mail } from 'lucide-react'
-import QuoteForm from '@/components/ui/QuoteForm'
 import SectionLabel from '@/components/ui/SectionLabel'
 import { buildMetadata } from '@/lib/seo'
 
@@ -38,10 +37,8 @@ export default function ContactPage() {
       </div>
 
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Info column */}
-            <div className="space-y-8">
+        <div className="max-w-3xl mx-auto">
+          <div className="space-y-8">
               <div>
                 <h2 className="font-heading font-bold text-pk-900 text-2xl mb-4">PK Landscaping Service</h2>
                 <ul className="space-y-4">
@@ -115,14 +112,6 @@ export default function ContactPage() {
                   title="PK Landscaping Service location map"
                 />
               </div>
-            </div>
-
-            {/* Form column */}
-            <div className="bg-pk-off-white rounded-2xl p-6 sm:p-8 border border-gray-100">
-              <h2 className="font-heading font-bold text-pk-900 text-2xl mb-2">Get a Free Estimate</h2>
-              <p className="text-gray-500 text-sm mb-6">Fill out the form below and we&apos;ll get back to you promptly.</p>
-              <QuoteForm />
-            </div>
           </div>
         </div>
       </section>
