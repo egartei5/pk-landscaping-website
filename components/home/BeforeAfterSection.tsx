@@ -115,7 +115,7 @@ export default function BeforeAfterSection() {
         <div className="text-center mt-12">
           <p className="text-gray-400 text-sm mb-4">Ready to transform your property?</p>
           <a href="/contact" className="btn-primary inline-block">
-            Get a Free Estimate →
+            Contact Us →
           </a>
         </div>
       </div>

@@ -86,7 +86,7 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
         >
           <Link href="/contact" className="btn-primary text-base px-8 py-4 w-full sm:w-auto font-bold">
-            Get Free Estimate →
+            Contact Us →
           </Link>
           <a href="tel:+12189791154" className="btn-outline text-base px-8 py-4 w-full sm:w-auto flex items-center justify-center gap-2 font-bold">
             <Phone size={16} /> Call Now: (218) 979-1154

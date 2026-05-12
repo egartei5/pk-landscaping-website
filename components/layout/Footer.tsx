@@ -99,7 +99,7 @@ export default function Footer() {
               <li>
                 <a href="/contact" className="flex items-start gap-2.5 text-gray-400 hover:text-pk-500 transition-colors text-sm">
                   <Mail size={14} className="mt-0.5 shrink-0 text-pk-500" />
-                  Get a free estimate
+                  Contact us
                 </a>
               </li>
               <li className="flex items-start gap-2.5 text-gray-400 text-sm">

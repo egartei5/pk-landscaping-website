@@ -87,7 +87,7 @@ export default function AboutPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact" className="btn-primary text-center">Get Free Estimate</Link>
+                <Link href="/contact" className="btn-primary text-center">Contact Us</Link>
                 <a href="tel:+12189791154" className="btn-outline-green text-center">Call (218) 979-1154</a>
               </div>
             </div>
@@ -109,7 +109,7 @@ export default function AboutPage() {
                   ))}
                 </ul>
                 <div className="mt-6 pt-6 border-t border-pk-700">
-                  <Link href="/contact" className="btn-primary w-full text-center block text-sm">Request a Quote</Link>
+                  <Link href="/contact" className="btn-primary w-full text-center block text-sm">Contact Us</Link>
                 </div>
               </div>
             </aside>

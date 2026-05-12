@@ -40,7 +40,7 @@ export default function ServicesPage() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Link href="/contact" className="btn-primary text-lg px-10 py-4">Get a Free Estimate</Link>
+            <Link href="/contact" className="btn-primary text-lg px-10 py-4">Contact Us</Link>
           </div>
         </div>
       </section>

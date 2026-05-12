@@ -113,7 +113,7 @@ export default function Header() {
               Book Now
             </Link>
             <Link href="/contact" className="btn-primary text-sm px-5 py-2.5">
-              Free Estimate
+              Contact Us
             </Link>
           </div>
 
@@ -155,7 +155,7 @@ export default function Header() {
               Book a Service
             </Link>
             <Link href="/contact" className="btn-primary text-center py-3">
-              Get Free Estimate
+              Contact Us
             </Link>
           </div>
         </div>

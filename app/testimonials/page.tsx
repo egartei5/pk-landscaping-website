@@ -77,7 +77,7 @@ export default async function TestimonialsPage() {
           </div>
 
           <div className="text-center mt-12">
-            <Link href="/contact" className="btn-primary text-base px-8 py-4">Get Your Free Estimate</Link>
+            <Link href="/contact" className="btn-primary text-base px-8 py-4">Contact Us</Link>
           </div>
         </div>
       </section>

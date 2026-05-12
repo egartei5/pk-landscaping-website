@@ -142,10 +142,10 @@ export default async function BlogPostPage({ params }: Props) {
                   Ready to Transform Your Property?
                 </h3>
                 <p className="text-white/70 mb-6">
-                  Get a free quote from PK Landscaping — serving Fargo and surrounding areas.
+                  Serving Fargo and surrounding areas — call or contact us today.
                 </p>
                 <Link href="/contact" className="btn-primary">
-                  Get Your Free Quote
+                  Contact Us
                 </Link>
               </div>
             </article>

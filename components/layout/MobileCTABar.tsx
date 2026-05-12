@@ -17,7 +17,7 @@ export default function MobileCTABar() {
         className="flex-1 bg-pk-500 hover:bg-pk-400 text-white flex items-center justify-center gap-2 py-4 font-bold text-sm transition-colors"
       >
         <FileText size={17} />
-        Get Estimate
+        Contact Us
       </Link>
     </div>
   )
