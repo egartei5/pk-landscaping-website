@@ -16,6 +16,7 @@ import BlogPreview from '@/components/home/BlogPreview'
 import ContactCTA from '@/components/home/ContactCTA'
 import BeforeAfterSection from '@/components/home/BeforeAfterSection'
 import FeaturedProjects from '@/components/home/FeaturedProjects'
+import HomeBookingSection from '@/components/home/HomeBookingSection'
 
 export const revalidate = 3600
 
@@ -41,6 +42,7 @@ export default async function HomePage() {
       <WhyChooseUs />
       <ProcessSection />
       <TestimonialsCarousel testimonials={testimonials} />
+      <HomeBookingSection />
       <BeforeAfterSection />
       <FeaturedProjects />
       <ServiceAreasSection />
