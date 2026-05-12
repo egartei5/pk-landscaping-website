@@ -42,10 +42,10 @@ export default function WhyChooseUs() {
           <div className="relative">
             <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80"
-                alt="PK Landscaping professional maintaining a residential property"
+                src="/images/rock-edging-spiral-bush-fargo.jpg"
+                alt="PK Landscaping completed rock edging and spiral bush installation in Fargo ND"
                 fill
-                className="object-cover"
+                className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>

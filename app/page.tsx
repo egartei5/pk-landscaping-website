@@ -15,6 +15,7 @@ import DiscountBanner from '@/components/home/DiscountBanner'
 import BlogPreview from '@/components/home/BlogPreview'
 import ContactCTA from '@/components/home/ContactCTA'
 import BeforeAfterSection from '@/components/home/BeforeAfterSection'
+import FeaturedProjects from '@/components/home/FeaturedProjects'
 
 export const revalidate = 3600
 
@@ -41,6 +42,7 @@ export default async function HomePage() {
       <ProcessSection />
       <TestimonialsCarousel testimonials={testimonials} />
       <BeforeAfterSection />
+      <FeaturedProjects />
       <ServiceAreasSection />
       <DiscountBanner />
       <BlogPreview posts={posts} />

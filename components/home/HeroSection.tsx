@@ -24,11 +24,11 @@ export default function HeroSection() {
       {/* Parallax background */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 scale-110">
         <Image
-          src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1920&q=85"
-          alt="Beautiful landscaped property by PK Landscaping in Fargo-Moorhead"
+          src="/images/lawn-mowing-stripes-premium-fargo.jpg"
+          alt="Premium lawn mowing with perfect stripes by PK Landscaping in Fargo ND"
           fill
           priority
-          className="object-cover"
+          className="object-cover object-center"
           sizes="100vw"
         />
       </motion.div>

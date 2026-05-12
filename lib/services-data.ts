@@ -8,6 +8,8 @@ export interface ServiceData {
   icon: string
   category: string
   heroImage: string
+  cardImage: string
+  cardImageAlt: string
 }
 
 export const servicesData: ServiceData[] = [
@@ -20,7 +22,9 @@ export const servicesData: ServiceData[] = [
     bullets: ['24/7 emergency response available', 'Residential driveways & commercial lots', 'De-icing and sand application', 'Parking lot clearing', 'Sidewalk and entryway service'],
     icon: '❄️',
     category: 'Winter',
-    heroImage: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=1600&q=80',
+    heroImage: '/images/commercial-snow-removal-lot-fargo.jpg',
+    cardImage: '/images/commercial-snow-removal-lot-fargo.jpg',
+    cardImageAlt: 'Commercial snow removal service in Fargo ND',
   },
   {
     slug: 'road-paving',
@@ -31,7 +35,9 @@ export const servicesData: ServiceData[] = [
     bullets: ['Residential driveways & commercial roads', 'Asphalt installation and resurfacing', 'Crack filling and seal coating', 'Proper drainage grading', 'Long-term warranty on select projects'],
     icon: '🛣️',
     category: 'Paving',
-    heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80',
+    heroImage: '/images/land-clearing-grading-fargo.jpg',
+    cardImage: '/images/land-clearing-grading-fargo.jpg',
+    cardImageAlt: 'Road grading and paving preparation in Fargo ND',
   },
   {
     slug: 'paver-installation',
@@ -42,7 +48,9 @@ export const servicesData: ServiceData[] = [
     bullets: ['Custom patio design and installation', 'Walkways and garden paths', 'Retaining walls and edging', 'Permeable paver options', 'Supporting drainage integration'],
     icon: '🧱',
     category: 'Paving',
-    heroImage: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&q=80',
+    heroImage: '/images/paver-patio-installation-fargo.jpg',
+    cardImage: '/images/paver-walkway-herringbone-fargo.jpg',
+    cardImageAlt: 'Paver walkway installation in Fargo ND',
   },
   {
     slug: 'lawn-mowing',
@@ -53,7 +61,9 @@ export const servicesData: ServiceData[] = [
     bullets: ['Weekly and bi-weekly plans available', 'Edging along sidewalks and driveways', 'Clipping removal included', 'Residential and commercial properties', 'Flexible scheduling options'],
     icon: '🌿',
     category: 'Lawn Care',
-    heroImage: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600&q=80',
+    heroImage: '/images/lawn-mowing-stripes-neighborhood-fargo.jpg',
+    cardImage: '/images/lawn-mowing-stripes-neighborhood-fargo.jpg',
+    cardImageAlt: 'Professional lawn mowing with stripe pattern in Fargo ND',
   },
   {
     slug: 'tree-services',
@@ -64,7 +74,9 @@ export const servicesData: ServiceData[] = [
     bullets: ['Tree planting and transplanting', 'Crown pruning and shaping', 'Dead branch removal', 'Tree trimming for clearance', 'Full tree removal with stump grinding'],
     icon: '🌳',
     category: 'Lawn Care',
-    heroImage: 'https://images.unsplash.com/photo-1518599904199-0ca897819ddb?w=1600&q=80',
+    heroImage: '/images/tree-ring-paver-circle-fargo.jpg',
+    cardImage: '/images/tree-ring-paver-circle-fargo.jpg',
+    cardImageAlt: 'Tree care and ring landscaping in Fargo ND',
   },
   {
     slug: 'brick-lane-construction',
@@ -75,7 +87,9 @@ export const servicesData: ServiceData[] = [
     bullets: ['Residential and commercial brick lanes', 'Custom layout and pattern design', 'Proper base preparation for longevity', 'Edging and border installation', 'Repair and restoration of existing brickwork'],
     icon: '🏗️',
     category: 'Paving',
-    heroImage: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=1600&q=80',
+    heroImage: '/images/paver-walkway-herringbone-fargo.jpg',
+    cardImage: '/images/paver-patio-installation-fargo.jpg',
+    cardImageAlt: 'Brick lane and paver construction in Fargo ND',
   },
   {
     slug: 'gutter-cleaning',
@@ -86,7 +100,9 @@ export const servicesData: ServiceData[] = [
     bullets: ['Complete debris removal', 'Downspout flushing and inspection', 'Gutter integrity check', 'Roof edge inspection included', 'Spring and fall service plans'],
     icon: '🏠',
     category: 'Maintenance',
-    heroImage: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80',
+    heroImage: '/images/snow-removal-roof-fargo.jpg',
+    cardImage: '/images/snow-removal-roof-fargo.jpg',
+    cardImageAlt: 'Roof and gutter service in Fargo ND',
   },
   {
     slug: 'seasonal-cleanup',
@@ -97,7 +113,9 @@ export const servicesData: ServiceData[] = [
     bullets: ['Leaf collection and removal', 'Garden bed cleanup and prep', 'Dead plant and debris removal', 'Lawn aeration available', 'Spring and fall service packages'],
     icon: '🍂',
     category: 'Lawn Care',
-    heroImage: 'https://images.unsplash.com/photo-1542773998-9325f0a098d7?w=1600&q=80',
+    heroImage: '/images/mulch-garden-rock-border-fargo.jpg',
+    cardImage: '/images/landscaping-crew-planting-fargo.jpg',
+    cardImageAlt: 'Seasonal landscaping cleanup crew in Fargo ND',
   },
 ]
 

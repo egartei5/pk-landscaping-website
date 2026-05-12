@@ -29,6 +29,8 @@ export default function ServicesSection() {
               title={service.title}
               shortDescription={service.shortDescription}
               icon={service.icon}
+              image={service.cardImage}
+              imageAlt={service.cardImageAlt}
             />
           ))}
         </div>

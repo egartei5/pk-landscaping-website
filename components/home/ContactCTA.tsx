@@ -6,10 +6,10 @@ export default function ContactCTA() {
   return (
     <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <Image
-        src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1920&q=80"
-        alt="PK Landscaping paver project background"
+        src="/images/paver-patio-installation-fargo.jpg"
+        alt="Paver patio installation project by PK Landscaping in Fargo ND"
         fill
-        className="object-cover"
+        className="object-cover object-center"
         sizes="100vw"
       />
       <div className="absolute inset-0 bg-pk-950/88" />
