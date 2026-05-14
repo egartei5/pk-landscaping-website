@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Script from 'next/script'
 import { CheckCircle2 } from 'lucide-react'
 import { servicesData, getServiceBySlug } from '@/lib/services-data'
+import { ServiceIcon } from '@/lib/service-icons'
 import { buildMetadata, serviceSchema } from '@/lib/seo'
 import SectionLabel from '@/components/ui/SectionLabel'
 
@@ -48,7 +49,9 @@ export default function ServicePage({ params }: Props) {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-pk-900/60 to-pk-950/95" />
         <div className="relative z-10 h-full flex flex-col justify-end pb-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <span className="text-3xl mb-3">{service.icon}</span>
+          <div className="w-12 h-12 bg-pk-500/20 rounded-xl flex items-center justify-center mb-3">
+            <ServiceIcon slug={service.slug} size={24} className="text-pk-400" />
+          </div>
           <h1 className="font-heading font-black text-white text-4xl sm:text-5xl mb-2">{service.title}</h1>
           <p className="text-gray-300 max-w-2xl">{service.shortDescription}</p>
         </div>
@@ -99,7 +102,7 @@ export default function ServicePage({ params }: Props) {
                   {related.map((s) => (
                     <li key={s.slug}>
                       <Link href={`/services/${s.slug}`} className="flex items-center gap-2 text-gray-400 hover:text-pk-500 text-sm transition-colors py-1">
-                        <span>{s.icon}</span> {s.title}
+                        <ServiceIcon slug={s.slug} size={13} className="text-pk-400 shrink-0" /> {s.title}
                       </Link>
                     </li>
                   ))}

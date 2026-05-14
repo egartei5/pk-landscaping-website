@@ -25,11 +25,21 @@ const config: Config = {
       animation: {
         'fade-up': 'fadeUp 0.6s ease-out forwards',
         'count-up': 'countUp 1s ease-out forwards',
+        'marquee': 'marquee 35s linear infinite',
+        'marquee-reverse': 'marqueeReverse 35s linear infinite',
       },
       keyframes: {
         fadeUp: {
           '0%': { opacity: '0', transform: 'translateY(24px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        marqueeReverse: {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0)' },
         },
       },
     },

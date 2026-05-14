@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
+import { ServiceIcon } from '@/lib/service-icons'
 
 interface ServiceCardProps {
   slug: string
   title: string
   shortDescription: string
-  icon: string
+  icon?: string
   image?: string
   imageAlt?: string
 }
@@ -25,10 +26,16 @@ export default function ServiceCard({ slug, title, shortDescription, icon, image
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-pk-900/80 via-pk-900/20 to-transparent" />
-          <span className="absolute bottom-3 left-3 text-2xl">{icon}</span>
+          <div className="absolute bottom-3 left-3 w-8 h-8 bg-pk-500/90 rounded-lg flex items-center justify-center backdrop-blur-sm">
+            <ServiceIcon slug={slug} size={16} className="text-white" />
+          </div>
         </div>
       )}
-      {!image && <div className="text-4xl mb-4">{icon}</div>}
+      {!image && (
+        <div className="w-12 h-12 bg-pk-500/20 rounded-xl flex items-center justify-center mb-4">
+          <ServiceIcon slug={slug} size={22} className="text-pk-400" />
+        </div>
+      )}
       <h3 className="font-heading font-bold text-white text-xl mb-2">{title}</h3>
       <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-1">{shortDescription}</p>
       <div className="flex flex-col sm:flex-row gap-3 mt-auto">

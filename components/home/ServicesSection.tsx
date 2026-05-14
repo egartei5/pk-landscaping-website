@@ -9,14 +9,14 @@ export default function ServicesSection() {
   const featured = servicesData.slice(0, 6)
 
   return (
-    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8">
+    <section className="bg-pk-950 py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <SectionLabel>What We Do</SectionLabel>
-          <h2 className="font-heading font-black text-pk-900 text-4xl sm:text-5xl mb-4">
+          <h2 className="font-heading font-black text-white text-4xl sm:text-5xl mb-4">
             We Specialize In These Services
           </h2>
-          <p className="text-gray-600 max-w-xl mx-auto">
+          <p className="text-gray-400 max-w-xl mx-auto">
             Expert & professional approach to every project — from the first call to the final walkthrough.
           </p>
         </div>
@@ -36,11 +36,11 @@ export default function ServicesSection() {
         </div>
 
         {/* Other services tag cloud */}
-        <div className="bg-pk-off-white rounded-2xl p-6 mb-8">
-          <p className="font-heading font-bold text-pk-900 text-sm uppercase tracking-widest mb-4">Also Offering</p>
+        <div className="bg-pk-800/50 border border-pk-700 rounded-2xl p-6 mb-8">
+          <p className="font-heading font-bold text-pk-400 text-sm uppercase tracking-widest mb-4">Also Offering</p>
           <div className="flex flex-wrap gap-2">
             {otherServices.map((s) => (
-              <span key={s} className="text-sm bg-white border border-gray-200 text-gray-600 px-3 py-1.5 rounded-full hover:border-pk-500 hover:text-pk-700 transition-colors cursor-default">
+              <span key={s} className="text-sm bg-pk-800 border border-pk-700 text-gray-400 px-3 py-1.5 rounded-full hover:border-pk-500 hover:text-pk-400 transition-colors cursor-default">
                 {s}
               </span>
             ))}
@@ -48,7 +48,7 @@ export default function ServicesSection() {
         </div>
 
         <div className="text-center">
-          <Link href="/services" className="btn-outline-green inline-block">
+          <Link href="/services" className="btn-primary inline-block">
             View All Services
           </Link>
         </div>

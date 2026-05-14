@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Shield, CheckCircle2 } from 'lucide-react'
 import SectionLabel from '@/components/ui/SectionLabel'
 import { servicesData } from '@/lib/services-data'
+import { ServiceIcon } from '@/lib/service-icons'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata: Metadata = buildMetadata({
@@ -103,7 +104,7 @@ export default function AboutPage() {
                   {servicesData.map((s) => (
                     <li key={s.slug}>
                       <Link href={`/services/${s.slug}`} className="flex items-center gap-2 text-gray-400 hover:text-pk-500 text-sm transition-colors py-1">
-                        <span>{s.icon}</span> {s.title}
+                        <ServiceIcon slug={s.slug} size={13} className="text-pk-400 shrink-0" /> {s.title}
                       </Link>
                     </li>
                   ))}

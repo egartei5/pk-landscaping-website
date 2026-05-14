@@ -3,16 +3,17 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown, Phone, Leaf } from 'lucide-react'
+import { ServiceIcon } from '@/lib/service-icons'
 
 const services = [
-  { label: 'Snow Removal', slug: 'snow-removal', icon: '❄️' },
-  { label: 'Road Paving', slug: 'road-paving', icon: '🛣️' },
-  { label: 'Paver Installation', slug: 'paver-installation', icon: '🧱' },
-  { label: 'Lawn Mowing', slug: 'lawn-mowing', icon: '🌿' },
-  { label: 'Tree Services', slug: 'tree-services', icon: '🌳' },
-  { label: 'Brick Lane Construction', slug: 'brick-lane-construction', icon: '🏗️' },
-  { label: 'Gutter Cleaning', slug: 'gutter-cleaning', icon: '🏠' },
-  { label: 'Seasonal Cleanup', slug: 'seasonal-cleanup', icon: '🍂' },
+  { label: 'Snow Removal', slug: 'snow-removal' },
+  { label: 'Road Paving', slug: 'road-paving' },
+  { label: 'Paver Installation', slug: 'paver-installation' },
+  { label: 'Lawn Mowing', slug: 'lawn-mowing' },
+  { label: 'Tree Services', slug: 'tree-services' },
+  { label: 'Brick Lane Construction', slug: 'brick-lane-construction' },
+  { label: 'Gutter Cleaning', slug: 'gutter-cleaning' },
+  { label: 'Seasonal Cleanup', slug: 'seasonal-cleanup' },
 ]
 
 const navLinks = [
@@ -80,7 +81,7 @@ export default function Header() {
                       <div className="bg-pk-800 border border-pk-700 rounded-xl shadow-2xl overflow-hidden">
                         {services.map((s) => (
                           <Link key={s.slug} href={`/services/${s.slug}`} className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-pk-700 hover:text-white transition-colors">
-                            <span>{s.icon}</span>
+                            <ServiceIcon slug={s.slug} size={14} className="text-pk-400 shrink-0" />
                             {s.label}
                           </Link>
                         ))}
@@ -142,7 +143,8 @@ export default function Header() {
             <div className="grid grid-cols-2 gap-1">
               {services.map((s) => (
                 <Link key={s.slug} href={`/services/${s.slug}`} className="flex items-center gap-2 px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-pk-800 rounded-lg transition-colors">
-                  <span>{s.icon}</span> {s.label}
+                  <ServiceIcon slug={s.slug} size={13} className="text-pk-400 shrink-0" />
+                  {s.label}
                 </Link>
               ))}
             </div>

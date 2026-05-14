@@ -49,12 +49,12 @@ const projects = [
 
 export default function FeaturedProjects() {
   return (
-    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8">
+    <section className="bg-pk-off-white py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-4">
           <div>
             <SectionLabel>Featured Projects</SectionLabel>
-            <h2 className="font-heading font-black text-pk-900 text-4xl sm:text-5xl">
+            <h2 className="font-heading font-black text-pk-950 text-4xl sm:text-5xl">
               Work We&apos;re Proud Of
             </h2>
           </div>
