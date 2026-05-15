@@ -1,62 +1,100 @@
+'use client'
 import Link from 'next/link'
 import { Tag, Users, ArrowRight } from 'lucide-react'
+import { motion } from 'framer-motion'
+import TextReveal from '@/components/motion/TextReveal'
+import FadeUpStagger, { FadeUpItem } from '@/components/motion/FadeUpStagger'
+import LineDrawIn from '@/components/motion/LineDrawIn'
 
 export default function DiscountBanner() {
   return (
-    <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div className="relative flex flex-col justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-24 overflow-hidden">
       {/* Animated gradient background */}
       <div
         className="absolute inset-0 animate-gradient"
-        style={{
-          background: 'linear-gradient(135deg, #1a3d1a, #4caf50, #2a5a2a, #6fcf73, #1a3d1a)',
-        }}
+        style={{ background: 'linear-gradient(135deg, #0a1a0b, #1a3d1a, #2a5a2a, #1a3d1a, #0a1a0b)' }}
       />
-      {/* Noise texture overlay for depth */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,255,0.3)_0%,_transparent_60%)]" />
+      {/* Green radial spotlight */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(76,175,80,0.18)_0%,transparent_70%)]" />
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center">
-        <p className="inline-flex items-center gap-2 text-white/70 font-heading font-bold text-xs tracking-widest uppercase mb-4">
-          <span className="w-6 h-px bg-white/40 inline-block" />
-          Limited Time Offer
-          <span className="w-6 h-px bg-white/40 inline-block" />
-        </p>
-        <h2 className="font-heading font-black text-white text-4xl sm:text-5xl mb-8 drop-shadow-sm">
-          Save On Your First Service
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-8">
-          <div className="bg-white/15 backdrop-blur-sm border border-white/25 rounded-2xl p-6 flex items-center gap-4 hover:bg-white/20 transition-colors">
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
-              <Tag size={22} className="text-white" />
-            </div>
-            <div className="text-left">
-              <p className="font-heading font-black text-white text-3xl leading-none">10% OFF</p>
-              <p className="text-white/80 text-sm mt-1">For First-Time Customers</p>
-            </div>
-          </div>
-          <div className="bg-white/15 backdrop-blur-sm border border-white/25 rounded-2xl p-6 flex items-center gap-4 hover:bg-white/20 transition-colors">
-            <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
-              <Users size={22} className="text-white" />
-            </div>
-            <div className="text-left">
-              <p className="font-heading font-black text-white text-3xl leading-none">5% OFF</p>
-              <p className="text-white/80 text-sm mt-1">Seniors, Veterans &amp; Repeat Clients</p>
-            </div>
-          </div>
-        </div>
-
-        <p className="text-white/75 mb-8 max-w-lg mx-auto text-sm leading-relaxed">
-          Mention your discount when requesting your estimate. We&apos;re proud to give back to the community that trusts us.
-        </p>
-
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 bg-white text-pk-900 hover:bg-gray-50 font-black px-8 py-4 rounded-xl transition-all duration-200 text-base shadow-xl hover:shadow-2xl hover:-translate-y-0.5 active:translate-y-0"
-        >
-          Claim Your Discount
-          <ArrowRight size={16} />
-        </Link>
+      <div className="absolute top-8 left-6 font-heading font-black text-[140px] leading-none text-pk-900/60 select-none pointer-events-none hidden lg:block">
+        08
       </div>
-    </section>
+
+      <div className="relative z-10 max-w-4xl mx-auto w-full text-center">
+        <FadeUpStagger delay={0.1}>
+          <FadeUpItem>
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <LineDrawIn className="w-12" color="bg-pk-500/40" />
+              <p className="text-pk-400 font-heading font-bold text-xs tracking-widest uppercase">Limited Time Offer</p>
+              <LineDrawIn className="w-12" color="bg-pk-500/40" />
+            </div>
+          </FadeUpItem>
+        </FadeUpStagger>
+
+        {/* Scale-slam headline */}
+        <motion.div
+          initial={{ scale: 1.15, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true, margin: '-5%' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-10"
+        >
+          <h2 className="font-heading font-black text-white text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-none">
+            Save On Your<br />
+            <span className="text-pk-400">First Service</span>
+          </h2>
+        </motion.div>
+
+        {/* Spring-bounce discount cards */}
+        <FadeUpStagger className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-10" delay={0.4} stagger={0.12}>
+          <FadeUpItem>
+            <motion.div
+              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 flex items-center gap-4 hover:bg-white/15 transition-colors"
+              whileInView={{ scale: [0.9, 1.03, 1] }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.45, duration: 0.5, ease: 'easeOut' }}
+            >
+              <div className="w-12 h-12 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
+                <Tag size={22} className="text-white" />
+              </div>
+              <div className="text-left">
+                <p className="font-heading font-black text-white text-4xl leading-none">10%</p>
+                <p className="text-white/80 text-sm mt-1">For First-Time Customers</p>
+              </div>
+            </motion.div>
+          </FadeUpItem>
+
+          <FadeUpItem>
+            <motion.div
+              className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 flex items-center gap-4 hover:bg-white/15 transition-colors"
+              whileInView={{ scale: [0.9, 1.03, 1] }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.57, duration: 0.5, ease: 'easeOut' }}
+            >
+              <div className="w-12 h-12 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
+                <Users size={22} className="text-white" />
+              </div>
+              <div className="text-left">
+                <p className="font-heading font-black text-white text-4xl leading-none">5%</p>
+                <p className="text-white/80 text-sm mt-1">Seniors, Veterans &amp; Repeat Clients</p>
+              </div>
+            </motion.div>
+          </FadeUpItem>
+        </FadeUpStagger>
+
+        <FadeUpStagger delay={0.7}>
+          <FadeUpItem>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 bg-white text-pk-950 hover:bg-gray-100 font-black px-10 py-4 rounded-xl transition-all duration-200 text-base shadow-2xl hover:-translate-y-0.5 active:translate-y-0"
+            >
+              Claim Your Discount
+              <ArrowRight size={16} />
+            </Link>
+          </FadeUpItem>
+        </FadeUpStagger>
+      </div>
+    </div>
   )
 }
