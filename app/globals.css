@@ -5,7 +5,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
   }
+
+  * {
+    cursor: none !important;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
@@ -26,6 +32,12 @@
   }
   .card-dark {
     @apply bg-pk-800 border border-pk-700 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(76,175,80,0.15)] hover:border-pk-500/50;
+  }
+
+  .scene-grain {
+    @apply absolute inset-0 pointer-events-none z-0 opacity-[0.04];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
   }
 }
 

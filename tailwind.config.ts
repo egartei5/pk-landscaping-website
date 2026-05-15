@@ -22,6 +22,10 @@ const config: Config = {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         heading: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
       },
+      fontSize: {
+        '8xl': ['6rem', { lineHeight: '1' }],
+        '9xl': ['8rem', { lineHeight: '1' }],
+      },
       animation: {
         'fade-up': 'fadeUp 0.6s ease-out forwards',
         'count-up': 'countUp 1s ease-out forwards',
