@@ -1,27 +1,49 @@
-import AnimatedCounter from '@/components/ui/AnimatedCounter'
+import CountUp from '@/components/motion/CountUp'
+import LineDrawIn from '@/components/motion/LineDrawIn'
+import FadeUpStagger, { FadeUpItem } from '@/components/motion/FadeUpStagger'
 
 const stats = [
-  { value: 6, suffix: '+', label: 'Years in Business' },
-  { value: 500, suffix: '+', label: 'Projects Completed' },
-  { value: 5, prefix: '★ ', suffix: '.0', label: 'Google Rating' },
-  { value: 100, suffix: '%', label: 'Satisfaction Guaranteed' },
+  { value: 6, suffix: '+', label: 'Years in Business', desc: 'Serving Fargo since 2019' },
+  { value: 500, suffix: '+', label: 'Projects Completed', desc: 'Residential & commercial' },
+  { value: 5, prefix: '', suffix: '.0 ★', label: 'Google Rating', desc: 'Consistently top-rated' },
+  { value: 100, suffix: '%', label: 'Satisfaction', desc: 'Guaranteed on every job' },
 ]
 
 export default function TrustStatsBar() {
   return (
-    <section className="bg-pk-800 border-y border-pk-700">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x lg:divide-pk-700">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center px-6">
-              <div className="font-heading font-black text-pk-500 text-4xl sm:text-5xl mb-1">
-                <AnimatedCounter to={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
-              </div>
-              <p className="text-gray-400 text-sm font-medium">{stat.label}</p>
-            </div>
+    <div className="relative flex flex-col justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-24">
+      {/* Radial glow — center */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_50%,rgba(76,175,80,0.10)_0%,transparent_70%)]" />
+
+      {/* Ghost section number */}
+      <div className="absolute top-8 left-6 font-heading font-black text-[140px] leading-none text-pk-900 select-none pointer-events-none hidden lg:block">
+        01
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        <div className="text-center mb-16">
+          <p className="section-label justify-center">By The Numbers</p>
+          <LineDrawIn className="max-w-24 mx-auto mt-2" delay={0.2} />
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-pk-800">
+          {stats.map((stat, i) => (
+            <FadeUpStagger key={stat.label} className="text-center px-8" delay={i * 0.1}>
+              <FadeUpItem>
+                <div className="font-heading font-black text-pk-400 text-6xl sm:text-7xl lg:text-8xl mb-2 leading-none">
+                  <CountUp to={stat.value} suffix={stat.suffix} prefix={stat.prefix} duration={2.5} />
+                </div>
+              </FadeUpItem>
+              <FadeUpItem>
+                <p className="text-white font-heading font-bold text-lg mb-1">{stat.label}</p>
+              </FadeUpItem>
+              <FadeUpItem>
+                <p className="text-gray-500 text-sm">{stat.desc}</p>
+              </FadeUpItem>
+            </FadeUpStagger>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   )
 }
