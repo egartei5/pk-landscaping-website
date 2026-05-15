@@ -5,6 +5,8 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import AnnouncementBar from '@/components/layout/AnnouncementBar'
 import MobileCTABar from '@/components/layout/MobileCTABar'
+import CustomCursor from '@/components/motion/CustomCursor'
+import ScrollProgress from '@/components/motion/ScrollProgress'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 const montserrat = Montserrat({
@@ -32,6 +34,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
       <body className="font-sans bg-white text-gray-900 antialiased">
+        <CustomCursor />
+        <ScrollProgress />
         <AnnouncementBar />
         <Header />
         <main className="pb-16 sm:pb-0">{children}</main>
