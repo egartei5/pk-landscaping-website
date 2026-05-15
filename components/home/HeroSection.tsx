@@ -1,11 +1,11 @@
 'use client'
-import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Phone, ChevronDown, Shield, Star, Clock, BadgeCheck } from 'lucide-react'
-
-const words = ['Transforming', 'Fargo', 'Properties', 'Into', 'Beautiful', 'Outdoor', 'Spaces']
+import TextReveal from '@/components/motion/TextReveal'
+import ImageReveal from '@/components/motion/ImageReveal'
+import FadeUpStagger, { FadeUpItem } from '@/components/motion/FadeUpStagger'
 
 const trustBadges = [
   { icon: BadgeCheck, text: 'Locally Owned' },
@@ -15,14 +15,10 @@ const trustBadges = [
 ]
 
 export default function HeroSection() {
-  const ref = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '40%'])
-
   return (
-    <section ref={ref} className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Parallax background */}
-      <motion.div style={{ y: bgY }} className="absolute inset-0 scale-110">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden snap-start bg-pk-950">
+      {/* Background image with curtain reveal */}
+      <ImageReveal className="absolute inset-0 scale-105">
         <Image
           src="/images/lawn-mowing-stripes-premium-fargo.jpg"
           alt="Premium lawn mowing with perfect stripes by PK Landscaping in Fargo ND"
@@ -31,49 +27,47 @@ export default function HeroSection() {
           className="object-cover object-center"
           sizes="100vw"
         />
-      </motion.div>
+      </ImageReveal>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-pk-900/60 via-pk-900/72 to-pk-950/97" />
+      {/* Dark gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-pk-950/40 via-pk-950/65 to-pk-950/95 z-[1]" />
+
+      {/* Radial glow */}
+      <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(76,175,80,0.12)_0%,transparent_70%)]" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-20">
         {/* Rating label */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="inline-flex items-center gap-2 mb-6"
+          transition={{ delay: 1.1, duration: 0.6 }}
+          className="inline-flex items-center gap-2 mb-8"
         >
           <div className="flex gap-0.5">
-            {[...Array(5)].map((_, i) => <Star key={i} size={12} className="text-yellow-400 fill-yellow-400" />)}
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} size={11} className="text-yellow-400 fill-yellow-400" />
+            ))}
           </div>
           <span className="text-pk-400 font-heading font-bold text-xs tracking-widest uppercase">
             Fargo-Moorhead&apos;s Top-Rated Landscaping Company
           </span>
         </motion.div>
 
-        {/* Staggered headline */}
-        <h1 className="font-heading font-black text-white text-5xl sm:text-6xl lg:text-7xl leading-tight tracking-tight mb-6">
-          {words.map((word, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + i * 0.08, ease: 'easeOut' }}
-              className="inline-block mr-[0.25em]"
-            >
-              {i >= 5 ? <span className="text-pk-400">{word}</span> : word}
-            </motion.span>
-          ))}
-        </h1>
+        {/* Giant cinematic headline */}
+        <TextReveal
+          text="Transforming Fargo Properties Into Beautiful Outdoor Spaces"
+          as="h1"
+          delay={1.2}
+          className="font-heading font-black text-white text-5xl sm:text-7xl lg:text-8xl leading-none tracking-tighter mb-8"
+        />
 
-        {/* Sub-headline */}
+        {/* Subtext */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.0 }}
-          className="text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto mb-8 leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           Lawn care, snow removal, paver installation, tree services & more — serving Fargo, Moorhead, and surrounding communities.
         </motion.p>
@@ -82,14 +76,17 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
+          transition={{ delay: 2.5, duration: 0.6 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
-          <Link href="/contact" className="btn-primary text-base px-8 py-4 w-full sm:w-auto font-bold">
-            Contact Us →
+          <Link href="/contact" className="btn-primary text-base px-10 py-4 w-full sm:w-auto font-bold text-lg">
+            Get a Free Estimate →
           </Link>
-          <a href="tel:+12189791154" className="btn-outline text-base px-8 py-4 w-full sm:w-auto flex items-center justify-center gap-2 font-bold">
-            <Phone size={16} /> Call Now: (218) 979-1154
+          <a
+            href="tel:+12189791154"
+            className="btn-outline text-base px-10 py-4 w-full sm:w-auto flex items-center justify-center gap-2 font-bold"
+          >
+            <Phone size={16} /> (218) 979-1154
           </a>
         </motion.div>
 
@@ -97,11 +94,11 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
+          transition={{ delay: 2.8, duration: 0.6 }}
+          className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
         >
           {trustBadges.map(({ icon: Icon, text }) => (
-            <div key={text} className="flex items-center gap-1.5 text-gray-300 text-sm">
+            <div key={text} className="flex items-center gap-2 text-gray-400 text-sm">
               <Icon size={14} className="text-pk-400" />
               <span className="font-medium">{text}</span>
             </div>
@@ -111,11 +108,14 @@ export default function HeroSection() {
 
       {/* Scroll indicator */}
       <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-400"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-gray-500"
       >
-        <ChevronDown size={24} />
+        <span className="text-xs tracking-widest uppercase font-medium">Scroll</span>
+        <ChevronDown size={20} />
       </motion.div>
     </section>
   )
