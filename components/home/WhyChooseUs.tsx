@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import { CheckCircle2 } from 'lucide-react'
-import SectionLabel from '@/components/ui/SectionLabel'
+import TextReveal from '@/components/motion/TextReveal'
+import ImageReveal from '@/components/motion/ImageReveal'
+import FadeUpStagger, { FadeUpItem } from '@/components/motion/FadeUpStagger'
+import LineDrawIn from '@/components/motion/LineDrawIn'
 
 const benefits = [
   'Create curb appeal effortlessly',
@@ -13,50 +16,67 @@ const benefits = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-pk-off-white py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div className="relative flex flex-col justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-24">
+      {/* Radial glow — top right */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_100%_0%,rgba(76,175,80,0.09)_0%,transparent_70%)]" />
+
+      {/* Ghost section number */}
+      <div className="absolute top-8 left-6 font-heading font-black text-[140px] leading-none text-pk-900 select-none pointer-events-none hidden lg:block">
+        03
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
           <div>
-            <SectionLabel>Why Choose Us</SectionLabel>
-            <h2 className="font-heading font-black text-pk-900 text-4xl sm:text-5xl mb-6">
-              A Team That Understands Nature — And Your Property
-            </h2>
-            <p className="text-gray-600 leading-relaxed mb-6">
-              Working with a team that understands the rhythm of nature — and how it impacts your property — is key to maintaining peace of mind year-round. Our landscape services go beyond surface appearances by focusing on sustainable practices, community-based values, and reliable follow-through on every job we accept.
-            </p>
-            <p className="text-gray-600 leading-relaxed mb-8">
-              For many homeowners and business managers alike, the emotional burden of neglected outdoor areas becomes overwhelming fast. We step in with responsive support built around real-life needs — from reviving frost-bitten lawns in springtime to approaching technical precision with thoughtful planning every step of the way.
-            </p>
-            <ul className="space-y-3">
+            <p className="section-label">Why Choose Us</p>
+            <LineDrawIn className="max-w-16 mt-2 mb-6" delay={0.1} />
+            <TextReveal
+              text="A Team That Understands Nature And Your Property"
+              as="h2"
+              className="font-heading font-black text-white text-4xl sm:text-5xl lg:text-6xl leading-none tracking-tight mb-8"
+            />
+
+            <FadeUpStagger className="space-y-3 mb-8" delay={0.5}>
               {benefits.map((benefit) => (
-                <li key={benefit} className="flex items-center gap-3">
+                <FadeUpItem key={benefit} className="flex items-center gap-3">
                   <CheckCircle2 size={18} className="text-pk-500 shrink-0" />
-                  <span className="text-gray-700 font-medium">{benefit}</span>
-                </li>
+                  <span className="text-gray-300 font-medium">{benefit}</span>
+                </FadeUpItem>
               ))}
-            </ul>
+            </FadeUpStagger>
+
+            <FadeUpStagger delay={0.9}>
+              <FadeUpItem>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  Serving Fargo, Moorhead, and surrounding communities with responsive support built around real-life needs — from reviving frost-bitten lawns in spring to precision hardscape installation.
+                </p>
+              </FadeUpItem>
+            </FadeUpStagger>
           </div>
 
-          {/* Image */}
+          {/* Image with curtain reveal */}
           <div className="relative">
-            <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+            <ImageReveal className="h-[500px] lg:h-[600px] rounded-2xl" delay={0.2}>
               <Image
                 src="/images/rock-edging-spiral-bush-fargo.jpg"
                 alt="PK Landscaping completed rock edging and spiral bush installation in Fargo ND"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-center rounded-2xl"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </div>
-            {/* Floating badge */}
-            <div className="absolute -bottom-4 -left-4 bg-pk-900 text-white rounded-xl px-5 py-4 shadow-xl">
-              <p className="font-heading font-black text-3xl text-pk-500">3+</p>
-              <p className="text-sm text-gray-300">Years Serving Fargo</p>
-            </div>
+            </ImageReveal>
+
+            {/* Floating stat badge */}
+            <FadeUpStagger className="absolute -bottom-6 -left-6" delay={1.0}>
+              <FadeUpItem className="bg-pk-800 border border-pk-700 rounded-2xl px-6 py-5 shadow-2xl">
+                <p className="font-heading font-black text-4xl text-pk-400 leading-none">3+</p>
+                <p className="text-gray-400 text-sm mt-1">Years Serving Fargo</p>
+              </FadeUpItem>
+            </FadeUpStagger>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
