@@ -1,7 +1,9 @@
 'use client'
+import { motion } from 'framer-motion'
 import { Star } from 'lucide-react'
-import SectionLabel from '@/components/ui/SectionLabel'
 import type { Testimonial } from '@prisma/client'
+import TextReveal from '@/components/motion/TextReveal'
+import LineDrawIn from '@/components/motion/LineDrawIn'
 
 interface Review {
   id: number
@@ -143,30 +145,42 @@ export default function TestimonialsCarousel({ testimonials }: TestimonialsCarou
   const ensuredRow2 = row2.length >= 3 ? row2 : [...row2, ...staticReviews.slice(4)]
 
   return (
-    <section className="bg-pk-900 py-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="text-center">
-          <SectionLabel>Client Reviews</SectionLabel>
-          <h2 className="font-heading font-black text-white text-4xl sm:text-5xl mb-3">
-            What Our Clients Say
-          </h2>
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => <Star key={i} size={15} className="text-yellow-400 fill-yellow-400" />)}
-            </div>
-            <span className="text-yellow-400 font-bold text-sm">5.0</span>
-            <span className="text-gray-500 text-sm">· {reviews.length}+ reviews</span>
+    <div className="relative flex flex-col justify-center min-h-screen overflow-hidden py-24">
+      {/* Radial glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_0%_100%,rgba(76,175,80,0.09)_0%,transparent_70%)]" />
+
+      {/* Ghost number */}
+      <div className="absolute top-8 right-6 font-heading font-black text-[140px] leading-none text-pk-900 select-none pointer-events-none hidden lg:block">
+        05
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-14 w-full">
+        <p className="section-label">Client Reviews</p>
+        <LineDrawIn className="max-w-16 mt-2 mb-6" delay={0.1} />
+        <TextReveal
+          text="What Our Clients Say"
+          as="h2"
+          className="font-heading font-black text-white text-4xl sm:text-6xl lg:text-7xl tracking-tight mb-4"
+        />
+        <div className="flex items-center gap-2">
+          <div className="flex gap-0.5">
+            {[...Array(5)].map((_, i) => <Star key={i} size={14} className="text-yellow-400 fill-yellow-400" />)}
           </div>
-          <p className="text-gray-400 max-w-xl mx-auto">
-            Real feedback from homeowners across Fargo, Moorhead, and surrounding communities.
-          </p>
+          <span className="text-yellow-400 font-bold text-sm">5.0</span>
+          <span className="text-gray-600 text-sm">· {reviews.length}+ reviews</span>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <motion.div
+        className="flex flex-col gap-4"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-5%' }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+      >
         <MarqueeRow reviews={ensuredRow1} />
         <MarqueeRow reviews={ensuredRow2} reverse />
-      </div>
-    </section>
+      </motion.div>
+    </div>
   )
 }
