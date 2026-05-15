@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { Phone, ChevronDown, Shield, Star, Clock, BadgeCheck } from 'lucide-react'
 import TextReveal from '@/components/motion/TextReveal'
 import ImageReveal from '@/components/motion/ImageReveal'
-import FadeUpStagger, { FadeUpItem } from '@/components/motion/FadeUpStagger'
 
 const trustBadges = [
   { icon: BadgeCheck, text: 'Locally Owned' },

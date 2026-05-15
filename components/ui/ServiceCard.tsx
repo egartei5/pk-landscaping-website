@@ -12,7 +12,7 @@ interface ServiceCardProps {
   imageAlt?: string
 }
 
-export default function ServiceCard({ slug, title, shortDescription, icon, image, imageAlt }: ServiceCardProps) {
+export default function ServiceCard({ slug, title, shortDescription, image, imageAlt }: ServiceCardProps) {
   return (
     <div className="card-dark group flex flex-col h-full overflow-hidden">
       {image && (

@@ -2,7 +2,6 @@
 import Link from 'next/link'
 import { Tag, Users, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
-import TextReveal from '@/components/motion/TextReveal'
 import FadeUpStagger, { FadeUpItem } from '@/components/motion/FadeUpStagger'
 import LineDrawIn from '@/components/motion/LineDrawIn'
 
