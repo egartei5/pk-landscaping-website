@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic'
-
 import Script from 'next/script'
 import { db } from '@/lib/db'
 import { localBusinessSchema } from '@/lib/seo'

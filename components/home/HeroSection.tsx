@@ -40,7 +40,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.6 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
           className="inline-flex items-center gap-2 mb-8"
         >
           <div className="flex gap-0.5">
@@ -57,7 +57,7 @@ export default function HeroSection() {
         <TextReveal
           text="Transforming Fargo Properties Into Beautiful Outdoor Spaces"
           as="h1"
-          delay={1.2}
+          delay={0.5}
           className="font-heading font-black text-white text-5xl sm:text-7xl lg:text-8xl leading-none tracking-tighter mb-8"
         />
 
@@ -65,7 +65,7 @@ export default function HeroSection() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 1.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           Lawn care, snow removal, paver installation, tree services & more — serving Fargo, Moorhead, and surrounding communities.
@@ -75,7 +75,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.5, duration: 0.6 }}
+          transition={{ delay: 1.4, duration: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
           <Link href="/contact" className="btn-primary text-base px-10 py-4 w-full sm:w-auto font-bold text-lg">
@@ -93,7 +93,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2.8, duration: 0.6 }}
+          transition={{ delay: 1.7, duration: 0.6 }}
           className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
         >
           {trustBadges.map(({ icon: Icon, text }) => (
