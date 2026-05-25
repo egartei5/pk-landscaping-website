@@ -4,7 +4,6 @@ import SectionLabel from '@/components/ui/SectionLabel'
 import QuoteCTASection from '@/components/ui/QuoteCTASection'
 import { servicesData } from '@/lib/services-data'
 import { buildMetadata } from '@/lib/seo'
-import Link from 'next/link'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Our Services',
