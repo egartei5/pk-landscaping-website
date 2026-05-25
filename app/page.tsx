@@ -17,7 +17,7 @@ import BlogPreview from '@/components/home/BlogPreview'
 import ValuePropsSection from '@/components/home/ValuePropsSection'
 import ServiceAreasSection from '@/components/home/ServiceAreasSection'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
   const [testimonials, posts] = await Promise.all([
