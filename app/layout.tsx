@@ -7,6 +7,7 @@ import AnnouncementBar from '@/components/layout/AnnouncementBar'
 import MobileCTABar from '@/components/layout/MobileCTABar'
 import CustomCursor from '@/components/motion/CustomCursor'
 import ScrollProgress from '@/components/motion/ScrollProgress'
+import BackToTop from '@/components/ui/BackToTop'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 const montserrat = Montserrat({
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="pb-16 sm:pb-0">{children}</main>
         <Footer />
         <MobileCTABar />
+        <BackToTop />
       </body>
     </html>
   )

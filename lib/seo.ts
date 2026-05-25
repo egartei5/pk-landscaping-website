@@ -38,7 +38,7 @@ export function localBusinessSchema() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'PK Landscaping Service',
-    description: 'Professional landscaping, snow removal, road paving, and outdoor services in Fargo, ND.',
+    description: 'Professional landscaping, snow removal, road paving, and outdoor services in Fargo, ND. Fully insured & bonded. Free estimates.',
     url: BASE_URL,
     telephone: '+12189791154',
     address: {
@@ -58,7 +58,29 @@ export function localBusinessSchema() {
       { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '07:00', closes: '20:00' },
     ],
     priceRange: '$$',
-    areaServed: { '@type': 'State', name: 'North Dakota' },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5',
+      reviewCount: '8',
+      bestRating: '5',
+      worstRating: '1',
+    },
+    areaServed: [
+      { '@type': 'City', name: 'Fargo', containedInPlace: { '@type': 'State', name: 'North Dakota' } },
+      { '@type': 'City', name: 'Moorhead', containedInPlace: { '@type': 'State', name: 'Minnesota' } },
+      { '@type': 'City', name: 'West Fargo', containedInPlace: { '@type': 'State', name: 'North Dakota' } },
+      { '@type': 'City', name: 'Horace', containedInPlace: { '@type': 'State', name: 'North Dakota' } },
+      { '@type': 'City', name: 'Dilworth', containedInPlace: { '@type': 'State', name: 'Minnesota' } },
+      { '@type': 'City', name: 'Casselton', containedInPlace: { '@type': 'State', name: 'North Dakota' } },
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Landscaping Services',
+      itemListElement: [
+        'Lawn Mowing', 'Snow Removal', 'Paver Installation', 'Road Paving',
+        'Tree Services', 'Gutter Cleaning', 'Seasonal Cleanup', 'Brick Lane Construction',
+      ].map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
+    },
   }
 }
 

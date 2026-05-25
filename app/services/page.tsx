@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import ServiceCard from '@/components/ui/ServiceCard'
 import SectionLabel from '@/components/ui/SectionLabel'
+import QuoteCTASection from '@/components/ui/QuoteCTASection'
 import { servicesData } from '@/lib/services-data'
 import { buildMetadata } from '@/lib/seo'
 import Link from 'next/link'
@@ -39,11 +40,10 @@ export default function ServicesPage() {
               />
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Link href="/contact" className="btn-primary text-lg px-10 py-4">Contact Us</Link>
-          </div>
         </div>
       </section>
+
+      <QuoteCTASection />
     </>
   )
 }

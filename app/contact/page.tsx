@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Phone, MapPin, Clock, Mail } from 'lucide-react'
 import SectionLabel from '@/components/ui/SectionLabel'
+import QuoteCTASection from '@/components/ui/QuoteCTASection'
 import { buildMetadata } from '@/lib/seo'
 
 export const metadata: Metadata = buildMetadata({
@@ -115,6 +116,11 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <QuoteCTASection
+        heading="Send Us a Message"
+        subtext="Fill out the form and we'll get back to you within one business day. Serving Fargo, Moorhead, and surrounding communities."
+      />
     </>
   )
 }

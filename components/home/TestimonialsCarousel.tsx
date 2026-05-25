@@ -1,5 +1,5 @@
 'use client'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Star } from 'lucide-react'
 import type { Testimonial } from '@prisma/client'
 import TextReveal from '@/components/motion/TextReveal'
@@ -111,14 +111,15 @@ function ReviewCard({ name, rating, review, service }: {
 }
 
 function MarqueeRow({ reviews, reverse }: { reviews: Review[]; reverse?: boolean }) {
+  const shouldReduce = useReducedMotion()
   const doubled = [...reviews, ...reviews]
   return (
     <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
       <div
-        className={`flex ${reverse ? 'animate-marquee-reverse' : 'animate-marquee'} hover:[animation-play-state:paused]`}
-        style={{ width: 'max-content' }}
+        className={`flex ${shouldReduce ? '' : reverse ? 'animate-marquee-reverse' : 'animate-marquee'} hover:[animation-play-state:paused] ${shouldReduce ? 'flex-wrap gap-4 px-4' : ''}`}
+        style={{ width: shouldReduce ? '100%' : 'max-content' }}
       >
-        {doubled.map((r, i) => (
+        {(shouldReduce ? reviews : doubled).map((r, i) => (
           <ReviewCard key={`${r.id}-${i}`} name={r.name} rating={r.rating} review={r.review} service={r.service} />
         ))}
       </div>
