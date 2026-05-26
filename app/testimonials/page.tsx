@@ -6,7 +6,7 @@ import { buildMetadata } from '@/lib/seo'
 import SectionLabel from '@/components/ui/SectionLabel'
 import TestimonialCard from '@/components/ui/TestimonialCard'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Client Testimonials',
