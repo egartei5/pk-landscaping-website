@@ -1,9 +1,7 @@
-'use client'
-import Image from 'next/image'
 import TextReveal from '@/components/motion/TextReveal'
-import ImageReveal from '@/components/motion/ImageReveal'
 import FadeUpStagger, { FadeUpItem } from '@/components/motion/FadeUpStagger'
 import LineDrawIn from '@/components/motion/LineDrawIn'
+import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider'
 
 const transformations = [
   {
@@ -48,65 +46,24 @@ export default function BeforeAfterSection() {
           <TextReveal
             text="Before & After"
             as="h2"
-            className="font-heading font-black text-white text-4xl sm:text-6xl lg:text-7xl tracking-tight"
+            className="font-heading font-black text-white text-4xl sm:text-6xl lg:text-7xl tracking-tight mb-3"
           />
+          <p className="text-gray-400 text-lg max-w-xl">
+            Drag the handle on any photo to see the transformation for yourself.
+          </p>
         </div>
 
         <FadeUpStagger className="grid grid-cols-1 md:grid-cols-3 gap-6" stagger={0.12} delay={0.3}>
-          {transformations.map((t, cardIdx) => (
+          {transformations.map((t) => (
             <FadeUpItem key={t.label}>
-              <div className="rounded-2xl overflow-hidden border border-pk-800 hover:border-pk-500/50 transition-colors duration-300 group">
-                <div className="grid grid-cols-2 relative">
-                  {/* Before */}
-                  <div className="relative">
-                    <div className="absolute top-2 left-2 z-20 bg-black/80 text-white text-xs font-bold px-2.5 py-1 rounded-full tracking-wide">
-                      Before
-                    </div>
-                    <ImageReveal className="aspect-[3/4]" delay={0.1 + cardIdx * 0.15}>
-                      <Image
-                        src={t.before}
-                        alt={t.beforeAlt}
-                        fill
-                        loading="lazy"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="16vw"
-                      />
-                      <div className="absolute inset-0 bg-pk-900/20" />
-                    </ImageReveal>
-                  </div>
-
-                  {/* Arrow */}
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-8 h-8 bg-pk-500 rounded-full flex items-center justify-center shadow-lg shadow-pk-500/50 group-hover:scale-110 transition-transform duration-300">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M5 2L9 7L5 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-
-                  {/* After */}
-                  <div className="relative">
-                    <div className="absolute top-2 right-2 z-20 bg-pk-500 text-white text-xs font-bold px-2.5 py-1 rounded-full tracking-wide">
-                      After
-                    </div>
-                    <ImageReveal className="aspect-[3/4]" delay={0.35 + cardIdx * 0.15}>
-                      <Image
-                        src={t.after}
-                        alt={t.afterAlt}
-                        fill
-                        loading="lazy"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="16vw"
-                      />
-                    </ImageReveal>
-                  </div>
-                </div>
-
-                <div className="bg-pk-900/80 px-4 py-3 flex items-center justify-between">
-                  <div>
-                    <p className="text-white font-heading font-bold text-sm">{t.label}</p>
-                    <p className="text-pk-400 text-xs mt-0.5">{t.location}</p>
-                  </div>
-                </div>
-              </div>
+              <BeforeAfterSlider
+                before={t.before}
+                after={t.after}
+                beforeAlt={t.beforeAlt}
+                afterAlt={t.afterAlt}
+                label={t.label}
+                location={t.location}
+              />
             </FadeUpItem>
           ))}
         </FadeUpStagger>
