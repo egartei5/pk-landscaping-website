@@ -163,12 +163,23 @@ export default function TestimonialsCarousel({ testimonials }: TestimonialsCarou
           as="h2"
           className="font-heading font-black text-white text-4xl sm:text-6xl lg:text-7xl tracking-tight mb-4"
         />
-        <div className="flex items-center gap-2">
-          <div className="flex gap-0.5">
-            {[...Array(5)].map((_, i) => <Star key={i} size={14} className="text-yellow-400 fill-yellow-400" />)}
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => <Star key={i} size={14} className="text-yellow-400 fill-yellow-400" />)}
+            </div>
+            <span className="text-yellow-400 font-bold text-sm">5.0</span>
+            <span className="text-gray-600 text-sm">· {reviews.length}+ verified reviews</span>
           </div>
-          <span className="text-yellow-400 font-bold text-sm">5.0</span>
-          <span className="text-gray-600 text-sm">· {reviews.length}+ reviews</span>
+          <a
+            href="https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 bg-pk-800 hover:bg-pk-700 border border-pk-700 hover:border-pk-500 text-gray-300 hover:text-white text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-200"
+          >
+            <Star size={10} className="fill-yellow-400 text-yellow-400" />
+            Leave a Review on Google
+          </a>
         </div>
       </div>
 

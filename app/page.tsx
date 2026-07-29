@@ -16,8 +16,10 @@ import HomeBookingSection from '@/components/home/HomeBookingSection'
 import BlogPreview from '@/components/home/BlogPreview'
 import ValuePropsSection from '@/components/home/ValuePropsSection'
 import ServiceAreasSection from '@/components/home/ServiceAreasSection'
+import MaintenancePlansSection from '@/components/home/MaintenancePlansSection'
+import GoogleReviewsBanner from '@/components/home/GoogleReviewsBanner'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export default async function HomePage() {
   const [testimonials, posts] = await Promise.all([
@@ -31,7 +33,7 @@ export default async function HomePage() {
         {JSON.stringify(localBusinessSchema())}
       </Script>
 
-      {/* Scene 1 — Hero: manages its own full-screen snap-start */}
+      {/* Scene 1 — Hero */}
       <HeroSection />
 
       {/* Scene 2 — Stats */}
@@ -80,6 +82,8 @@ export default async function HomePage() {
       </SceneWrapper>
 
       {/* Non-snap supplementary sections */}
+      <GoogleReviewsBanner />
+      <MaintenancePlansSection />
       <ValuePropsSection />
       <HomeBookingSection />
       <ServiceAreasSection />

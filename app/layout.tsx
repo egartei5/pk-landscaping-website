@@ -8,6 +8,7 @@ import MobileCTABar from '@/components/layout/MobileCTABar'
 import CustomCursor from '@/components/motion/CustomCursor'
 import ScrollProgress from '@/components/motion/ScrollProgress'
 import BackToTop from '@/components/ui/BackToTop'
+import WhatsAppButton from '@/components/ui/WhatsAppButton'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 const montserrat = Montserrat({
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <MobileCTABar />
         <BackToTop />
+        <WhatsAppButton />
       </body>
     </html>
   )

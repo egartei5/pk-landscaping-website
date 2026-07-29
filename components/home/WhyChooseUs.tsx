@@ -6,12 +6,12 @@ import FadeUpStagger, { FadeUpItem } from '@/components/motion/FadeUpStagger'
 import LineDrawIn from '@/components/motion/LineDrawIn'
 
 const benefits = [
-  'Create curb appeal effortlessly',
-  'Free up your personal time',
-  'Ensure safer walking paths and driveways',
-  'Simplify ongoing yard maintenance',
-  'Add structure and value to open spaces',
-  'Support healthier, greener plant growth',
+  'Free estimates — no commitment, no pressure',
+  'Fully insured & bonded for your peace of mind',
+  'Fast response — same-day or next-day service',
+  '10% off for new customers, 5% for seniors & veterans',
+  'Consistent crew — same team every visit',
+  'Satisfaction guaranteed or we come back free',
 ]
 
 export default function WhyChooseUs() {

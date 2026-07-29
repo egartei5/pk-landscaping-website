@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Phone, MapPin, Mail, Clock, ExternalLink, Leaf } from 'lucide-react'
+import { Phone, MapPin, Mail, Clock, Leaf, Star } from 'lucide-react'
 
 const serviceLinks = [
   { label: 'Snow Removal', href: '/services/snow-removal' },
@@ -41,15 +41,35 @@ export default function Footer() {
             <p className="text-gray-400 text-sm leading-relaxed mb-5">
               Professional landscaping, snow removal, and outdoor services in Fargo, ND. Fully insured, bonded, and community-focused since 2020.
             </p>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="PK Landscaping on Facebook"
-              className="w-9 h-9 bg-pk-800 hover:bg-pk-700 rounded-lg flex items-center justify-center transition-colors inline-flex"
-            >
-              <ExternalLink size={16} className="text-gray-300" />
-            </a>
+            <div className="flex items-center gap-2 mb-5">
+              <a
+                href="https://www.facebook.com/pklandscapingmn"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="PK Landscaping on Facebook"
+                className="w-9 h-9 bg-pk-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-gray-300">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              <a
+                href="https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Leave a Google Review"
+                className="w-9 h-9 bg-pk-800 hover:bg-[#4285F4] rounded-lg flex items-center justify-center transition-colors"
+              >
+                <Star size={15} className="text-gray-300" />
+              </a>
+            </div>
+            <div className="flex items-center gap-1.5 bg-pk-800 rounded-lg px-3 py-2 w-fit">
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => <Star key={i} size={10} className="text-yellow-400 fill-yellow-400" />)}
+              </div>
+              <span className="text-yellow-400 font-bold text-xs">5.0</span>
+              <span className="text-gray-500 text-xs">Google Rating</span>
+            </div>
           </div>
 
           {/* Services */}

@@ -5,11 +5,24 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
+  }
+
+  /* Snap scroll only on large screens — phones scroll naturally */
+  @media (min-width: 1024px) {
+    html {
+      scroll-snap-type: y mandatory;
+    }
   }
 
   * {
     cursor: none !important;
+  }
+
+  /* Restore default cursor on touch/mobile devices */
+  @media (hover: none) and (pointer: coarse) {
+    * {
+      cursor: auto !important;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -49,5 +62,13 @@
   .animate-gradient {
     background-size: 200% 200%;
     animation: gradient-shift 4s ease infinite;
+  }
+
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+  .animate-pulse-ring {
+    animation: pulse-ring 2s ease-out infinite;
   }
 }

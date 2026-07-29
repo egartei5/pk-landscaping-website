@@ -15,6 +15,7 @@ const config: Config = {
         'pk-700': '#2a5a2a',
         'pk-500': '#4caf50',
         'pk-400': '#6fcf73',
+        'pk-50': '#f0faf0',
         'pk-off-white': '#f8f8f6',
         'pk-earth': '#f0ede8',
       },
