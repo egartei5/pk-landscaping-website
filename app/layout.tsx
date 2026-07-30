@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Montserrat } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
@@ -9,6 +10,8 @@ import CustomCursor from '@/components/motion/CustomCursor'
 import ScrollProgress from '@/components/motion/ScrollProgress'
 import BackToTop from '@/components/ui/BackToTop'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
+
+const GA_ID = 'G-FR18EBC59G'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
 const montserrat = Montserrat({
@@ -36,6 +39,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
       <body className="font-sans bg-white text-gray-900 antialiased">
+        {/* Google Analytics 4 */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}', { page_path: window.location.pathname });
+          `}
+        </Script>
+
         <CustomCursor />
         <ScrollProgress />
         <AnnouncementBar />
