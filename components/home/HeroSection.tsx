@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Phone, ChevronDown, Shield, Star, Clock, BadgeCheck } from 'lucide-react'
 import TextReveal from '@/components/motion/TextReveal'
-import ImageReveal from '@/components/motion/ImageReveal'
 
 const trustBadges = [
   { icon: BadgeCheck, text: 'Locally Owned' },
@@ -16,8 +15,13 @@ const trustBadges = [
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden snap-start bg-pk-950">
-      {/* Background image with curtain reveal */}
-      <ImageReveal className="absolute inset-0 scale-105">
+      {/* Background image */}
+      <motion.div
+        className="absolute inset-0 scale-105"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2, ease: 'easeOut' }}
+      >
         <Image
           src="/images/lawn-mowing-stripes-premium-fargo.jpg"
           alt="Premium lawn mowing with perfect stripes by PK Landscaping in Fargo ND"
@@ -26,7 +30,7 @@ export default function HeroSection() {
           className="object-cover object-center"
           sizes="100vw"
         />
-      </ImageReveal>
+      </motion.div>
 
       {/* Dark gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-pk-950/40 via-pk-950/65 to-pk-950/95 z-[1]" />
@@ -63,6 +67,7 @@ export default function HeroSection() {
           text="Transforming Fargo Properties Into Beautiful Outdoor Spaces"
           as="h1"
           delay={0.5}
+          immediate
           className="font-heading font-black text-white text-5xl sm:text-7xl lg:text-8xl leading-none tracking-tighter mb-8"
         />
 

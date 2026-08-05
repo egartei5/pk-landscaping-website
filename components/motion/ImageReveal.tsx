@@ -6,10 +6,16 @@ interface ImageRevealProps {
   children: ReactNode
   className?: string
   delay?: number
+  immediate?: boolean
 }
 
-export default function ImageReveal({ children, className = '', delay = 0 }: ImageRevealProps) {
+export default function ImageReveal({ children, className = '', delay = 0, immediate = false }: ImageRevealProps) {
   const shouldReduce = useReducedMotion()
+  const target = shouldReduce ? 0.01 : 0.9
+
+  const animationProps = immediate
+    ? { animate: { scaleX: 0 } }
+    : { whileInView: { scaleX: 0 }, viewport: { once: true, margin: '-5%' } }
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
@@ -18,11 +24,10 @@ export default function ImageReveal({ children, className = '', delay = 0 }: Ima
         className="absolute inset-0 bg-pk-950 z-10"
         style={{ transformOrigin: 'left' }}
         initial={{ scaleX: 1 }}
-        whileInView={{ scaleX: 0 }}
-        viewport={{ once: true, margin: '-5%' }}
+        {...animationProps}
         transition={{
           delay: shouldReduce ? 0 : delay,
-          duration: shouldReduce ? 0.01 : 0.9,
+          duration: target,
           ease: [0.76, 0, 0.24, 1],
         }}
       />
