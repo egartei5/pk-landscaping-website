@@ -19,7 +19,7 @@ import ServiceAreasSection from '@/components/home/ServiceAreasSection'
 import MaintenancePlansSection from '@/components/home/MaintenancePlansSection'
 import GoogleReviewsBanner from '@/components/home/GoogleReviewsBanner'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export default async function HomePage() {
   const [testimonials, posts] = await Promise.all([
