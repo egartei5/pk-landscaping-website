@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidateTag } from 'next/cache'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/db'
+import { HOME_CONTENT_TAG } from '@/lib/cacheTags'
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions)
@@ -12,6 +14,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     where: { id: parseInt(params.id) },
     data: body,
   })
+  revalidateTag(HOME_CONTENT_TAG)
   return NextResponse.json(testimonial)
 }
 
@@ -20,5 +23,6 @@ export async function DELETE(_req: NextRequest, { params }: { params: { id: stri
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   await db.testimonial.delete({ where: { id: parseInt(params.id) } })
+  revalidateTag(HOME_CONTENT_TAG)
   return NextResponse.json({ success: true })
 }

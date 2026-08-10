@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { env } from './env'
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -10,6 +11,22 @@ const transporter = nodemailer.createTransport({
   },
 })
 
+/**
+ * All outbound mail goes through here. Callers treat email as best-effort,
+ * so an unconfigured mailbox must produce a loud, specific log line instead
+ * of a vague connection error buried in a .catch().
+ */
+async function send(options: nodemailer.SendMailOptions) {
+  if (!env.emailConfigured) {
+    console.error(
+      `[email] NOT SENT — "${options.subject}". SMTP is not fully configured; ` +
+        'check SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS and NOTIFICATION_EMAIL.'
+    )
+    return
+  }
+  await transporter.sendMail(options)
+}
+
 export async function sendQuoteNotification(data: {
   name: string
   phone?: string | null
@@ -17,7 +34,7 @@ export async function sendQuoteNotification(data: {
   service?: string | null
   message: string
 }) {
-  await transporter.sendMail({
+  await send({
     from: `"PK Landscaping Website" <${process.env.SMTP_USER}>`,
     to: process.env.NOTIFICATION_EMAIL,
     subject: `New Quote Request from ${data.name}`,
@@ -44,7 +61,7 @@ export async function sendBookingConfirmationToCustomer(data: {
   date: string
   timeSlot: string
 }) {
-  await transporter.sendMail({
+  await send({
     from: `"PK Landscaping" <${process.env.SMTP_USER}>`,
     to: data.email,
     subject: `Booking Request Received — PK Landscaping`,
@@ -73,7 +90,7 @@ export async function sendBookingStatusEmail(data: {
   status: 'accepted' | 'rejected'
 }) {
   const accepted = data.status === 'accepted'
-  await transporter.sendMail({
+  await send({
     from: `"PK Landscaping" <${process.env.SMTP_USER}>`,
     to: data.email,
     subject: accepted
@@ -113,7 +130,7 @@ export async function sendBookingAlertToAdmin(data: {
   location?: string | null
   notes?: string | null
 }) {
-  await transporter.sendMail({
+  await send({
     from: `"PK Landscaping Website" <${process.env.SMTP_USER}>`,
     to: process.env.NOTIFICATION_EMAIL,
     subject: `📅 New Booking Request — ${data.date} at ${data.timeSlot}`,

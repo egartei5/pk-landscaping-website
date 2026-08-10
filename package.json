@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
-    "start": "prisma migrate deploy && next start",
+    "start": "prisma migrate deploy && node scripts/bootstrap.mjs && next start",
     "lint": "next lint",
     "db:seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
     "db:studio": "prisma studio"
@@ -22,6 +22,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "html-react-parser": "^6.1.0",
+    "ioredis": "^5.11.1",
     "lucide-react": "^1.14.0",
     "next": "14.2.35",
     "next-auth": "^4.24.14",

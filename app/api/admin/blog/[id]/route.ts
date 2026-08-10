@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidateTag } from 'next/cache'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/db'
+import { HOME_CONTENT_TAG } from '@/lib/cacheTags'
 import { blogPostSchema } from '@/lib/validation'
 
 export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
@@ -31,6 +33,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       publishedAt: published && !existing?.publishedAt ? new Date() : existing?.publishedAt ?? null,
     },
   })
+  revalidateTag(HOME_CONTENT_TAG)
   return NextResponse.json(post)
 }
 
@@ -39,5 +42,6 @@ export async function DELETE(_req: NextRequest, { params }: { params: { id: stri
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   await db.blogPost.delete({ where: { id: parseInt(params.id) } })
+  revalidateTag(HOME_CONTENT_TAG)
   return NextResponse.json({ success: true })
 }

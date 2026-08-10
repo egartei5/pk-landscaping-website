@@ -1,18 +1,8 @@
 'use client'
-import { useEffect, useState } from 'react'
 import { motion, useScroll } from 'framer-motion'
 
 export default function ScrollProgress() {
-  const [isTouch, setIsTouch] = useState(true)
   const { scrollYProgress } = useScroll()
-
-  useEffect(() => {
-    if (!window.matchMedia('(pointer: coarse)').matches) {
-      setIsTouch(false)
-    }
-  }, [])
-
-  if (isTouch) return null
 
   return (
     <motion.div

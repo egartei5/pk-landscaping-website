@@ -2,6 +2,7 @@ import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
 import { db } from './db'
+import { env } from './env'
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -23,7 +24,7 @@ export const authOptions: NextAuthOptions = {
   ],
   session: { strategy: 'jwt' },
   pages: { signIn: '/admin/login' },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: env.nextAuthSecret,
   callbacks: {
     async jwt({ token, user }) {
       if (user) token.id = user.id

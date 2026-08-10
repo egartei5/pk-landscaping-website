@@ -5,9 +5,6 @@ const nextConfig = {
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'plus.unsplash.com' },
     ],
-    formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 86400,
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
   },
   async headers() {
     return [
@@ -26,7 +23,10 @@ const nextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: blob: https://images.unsplash.com https://plus.unsplash.com https://www.google-analytics.com https://www.googletagmanager.com",
+              // Broad https: is required because the admin gallery accepts
+              // arbitrary image URLs (any CDN, Unsplash, Google Photos, ...).
+              // Images are only ever rendered, never executed.
+              "img-src 'self' data: blob: https:",
               "frame-src https://www.google.com https://maps.google.com",
               "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.google.com https://www.googletagmanager.com",
             ].join('; '),

@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -43,7 +43,7 @@ model Testimonial {
 
 model GalleryImage {
   id        Int      @id @default(autoincrement())
-  url       String
+  url       String   @unique
   alt       String
   category  String
   sortOrder Int      @default(0)

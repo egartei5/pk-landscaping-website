@@ -8,4 +8,5 @@ cmds = ["npm ci"]
 cmds = ["npm run build"]
 
 [start]
-cmd = "npx prisma migrate deploy && npm start"
+# `npm start` already runs: prisma migrate deploy -> scripts/bootstrap.mjs -> next start
+cmd = "npm start"

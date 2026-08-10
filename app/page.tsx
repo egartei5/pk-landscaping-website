@@ -1,36 +1,46 @@
 import Script from 'next/script'
-import dynamicImport from 'next/dynamic'
+import { unstable_cache } from 'next/cache'
 import { db } from '@/lib/db'
+import { HOME_CONTENT_TAG } from '@/lib/cacheTags'
 import { localBusinessSchema } from '@/lib/seo'
 import SceneWrapper from '@/components/motion/SceneWrapper'
 import HeroSection from '@/components/home/HeroSection'
+import TrustStatsBar from '@/components/home/TrustStatsBar'
+import ServicesSection from '@/components/home/ServicesSection'
+import WhyChooseUs from '@/components/home/WhyChooseUs'
+import ProcessSection from '@/components/home/ProcessSection'
+import TestimonialsCarousel from '@/components/home/TestimonialsCarousel'
+import BeforeAfterSection from '@/components/home/BeforeAfterSection'
+import FeaturedProjects from '@/components/home/FeaturedProjects'
+import DiscountBanner from '@/components/home/DiscountBanner'
+import ContactCTA from '@/components/home/ContactCTA'
+import HomeBookingSection from '@/components/home/HomeBookingSection'
+import BlogPreview from '@/components/home/BlogPreview'
+import ValuePropsSection from '@/components/home/ValuePropsSection'
+import ServiceAreasSection from '@/components/home/ServiceAreasSection'
+import MaintenancePlansSection from '@/components/home/MaintenancePlansSection'
+import GoogleReviewsBanner from '@/components/home/GoogleReviewsBanner'
 
-// Server components — code-split, still SSR'd
-const TrustStatsBar           = dynamicImport(() => import('@/components/home/TrustStatsBar'))
-const ServicesSection         = dynamicImport(() => import('@/components/home/ServicesSection'))
-const WhyChooseUs             = dynamicImport(() => import('@/components/home/WhyChooseUs'))
-const BeforeAfterSection      = dynamicImport(() => import('@/components/home/BeforeAfterSection'))
-const FeaturedProjects        = dynamicImport(() => import('@/components/home/FeaturedProjects'))
-const ContactCTA              = dynamicImport(() => import('@/components/home/ContactCTA'))
-const GoogleReviewsBanner     = dynamicImport(() => import('@/components/home/GoogleReviewsBanner'))
-const MaintenancePlansSection = dynamicImport(() => import('@/components/home/MaintenancePlansSection'))
-const ValuePropsSection       = dynamicImport(() => import('@/components/home/ValuePropsSection'))
-const HomeBookingSection      = dynamicImport(() => import('@/components/home/HomeBookingSection'))
-const ServiceAreasSection     = dynamicImport(() => import('@/components/home/ServiceAreasSection'))
-const BlogPreview             = dynamicImport(() => import('@/components/home/BlogPreview'))
-
-// Client components — skip SSR, load only client-side
-const ProcessSection       = dynamicImport(() => import('@/components/home/ProcessSection'), { ssr: false })
-const TestimonialsCarousel = dynamicImport(() => import('@/components/home/TestimonialsCarousel'), { ssr: false })
-const DiscountBanner       = dynamicImport(() => import('@/components/home/DiscountBanner'), { ssr: false })
-
+// The page stays dynamic because Railway's private network — and therefore
+// Postgres — is not reachable during the build, so prerendering would fail.
+// The database work is cached instead, which is what actually mattered: the
+// homepage no longer queries the database on every single request.
 export const dynamic = 'force-dynamic'
 
+const getHomeContent = unstable_cache(
+  async () => {
+    const [testimonials, posts] = await Promise.all([
+      db.testimonial.findMany({ where: { published: true }, orderBy: { date: 'desc' } }),
+      db.blogPost.findMany({ where: { published: true }, orderBy: { publishedAt: 'desc' }, take: 3 }),
+    ])
+    return { testimonials, posts }
+  },
+  ['home-content'],
+  { tags: [HOME_CONTENT_TAG], revalidate: 60 }
+)
+
 export default async function HomePage() {
-  const [testimonials, posts] = await Promise.all([
-    db.testimonial.findMany({ where: { published: true }, orderBy: { date: 'desc' } }),
-    db.blogPost.findMany({ where: { published: true }, orderBy: { publishedAt: 'desc' }, take: 3 }),
-  ])
+  const { testimonials, posts } = await getHomeContent()
 
   return (
     <>

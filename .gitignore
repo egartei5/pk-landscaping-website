@@ -15,6 +15,11 @@
 # misc
 .DS_Store
 *.pem
+# macOS AppleDouble metadata (created on non-HFS volumes, e.g. exFAT drives)
+._*
+.AppleDouble
+.Spotlight-V100
+.Trashes
 # debug
 npm-debug.log*
 yarn-debug.log*

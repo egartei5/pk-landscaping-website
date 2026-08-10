@@ -10,7 +10,9 @@ interface GalleryImage {
   sortOrder: number
 }
 
-const CATEGORIES = ['Before & After', 'Lawn Care', 'Snow Removal', 'Paving', 'Landscaping', 'Hardscaping']
+// Keep in sync with the categories used by the public /gallery page
+// (see data/gallery.json) so the public filter tabs stay tidy.
+const CATEGORIES = ['Lawn Care', 'Landscaping', 'Pavers', 'Snow Removal', 'Hardscape', 'Before & After']
 
 export default function AdminGalleryPage() {
   const [images, setImages] = useState<GalleryImage[]>([])
@@ -18,11 +20,18 @@ export default function AdminGalleryPage() {
   const [showForm, setShowForm] = useState(false)
   const [form, setForm] = useState({ url: '', alt: '', category: CATEGORIES[0], sortOrder: 0 })
   const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   async function load() {
-    const res = await fetch('/api/admin/gallery')
-    setImages(await res.json())
-    setLoading(false)
+    try {
+      const res = await fetch('/api/admin/gallery')
+      if (!res.ok) throw new Error(`Failed to load gallery (${res.status})`)
+      setImages(await res.json())
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load gallery')
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => { load() }, [])
@@ -30,20 +39,35 @@ export default function AdminGalleryPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSaving(true)
-    await fetch('/api/admin/gallery', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    })
-    setForm({ url: '', alt: '', category: CATEGORIES[0], sortOrder: 0 })
-    setShowForm(false)
-    setSaving(false)
-    load()
+    setError(null)
+    try {
+      const res = await fetch('/api/admin/gallery', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => null)
+        throw new Error(data?.error ?? `Could not add image (${res.status})`)
+      }
+      setForm({ url: '', alt: '', category: CATEGORIES[0], sortOrder: 0 })
+      setShowForm(false)
+      await load()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Could not add image')
+    } finally {
+      setSaving(false)
+    }
   }
 
   async function deleteImage(id: number) {
     if (!confirm('Delete this image?')) return
-    await fetch(`/api/admin/gallery/${id}`, { method: 'DELETE' })
+    setError(null)
+    const res = await fetch(`/api/admin/gallery/${id}`, { method: 'DELETE' })
+    if (!res.ok) {
+      setError(`Could not delete image (${res.status})`)
+      return
+    }
     setImages((prev) => prev.filter((img) => img.id !== id))
   }
 
@@ -62,6 +86,12 @@ export default function AdminGalleryPage() {
           Add Image
         </button>
       </div>
+
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/40 text-red-300 rounded-xl px-4 py-3 text-sm">
+          {error}
+        </div>
+      )}
 
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-pk-900 rounded-2xl border border-pk-500/30 p-6 space-y-4">

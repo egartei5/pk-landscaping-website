@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidateTag } from 'next/cache'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/db'
+import { HOME_CONTENT_TAG } from '@/lib/cacheTags'
 import { blogPostSchema } from '@/lib/validation'
 
 export async function GET() {
@@ -28,5 +30,6 @@ export async function POST(req: NextRequest) {
       publishedAt: published ? new Date() : null,
     },
   })
+  revalidateTag(HOME_CONTENT_TAG)
   return NextResponse.json(post, { status: 201 })
 }

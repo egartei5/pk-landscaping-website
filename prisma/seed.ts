@@ -132,21 +132,10 @@ async function main() {
     })
   }
 
-  // Gallery images
-  const images = [
-    { url: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80', alt: 'Freshly mowed lawn with clean stripes', category: 'Lawn Care', sortOrder: 1 },
-    { url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', alt: 'Professional road paving in progress', category: 'Paving', sortOrder: 2 },
-    { url: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80', alt: 'Beautiful paver patio installation', category: 'Pavers', sortOrder: 3 },
-    { url: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=800&q=80', alt: 'Snow removal from residential driveway', category: 'Snow Removal', sortOrder: 4 },
-    { url: 'https://images.unsplash.com/photo-1518599904199-0ca897819ddb?w=800&q=80', alt: 'Professional tree trimming service', category: 'Trees', sortOrder: 5 },
-    { url: 'https://images.unsplash.com/photo-1542773998-9325f0a098d7?w=800&q=80', alt: 'Fall cleanup of leaf-covered lawn', category: 'Lawn Care', sortOrder: 6 },
-    { url: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=800&q=80', alt: 'Lush green residential lawn after mowing', category: 'Lawn Care', sortOrder: 7 },
-    { url: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80', alt: 'Brick paver walkway installation', category: 'Pavers', sortOrder: 8 },
-  ]
-
-  for (const img of images) {
-    await db.galleryImage.create({ data: img })
-  }
+  // Gallery images are NOT seeded here — the public /gallery page now reads
+  // from the GalleryImage table, and scripts/bootstrap.mjs populates it from
+  // data/gallery.json (the real project photos) on first boot. Seeding stock
+  // Unsplash placeholders here would put them on the live gallery.
 
   console.log('✅ Database seeded successfully')
 }

@@ -6,9 +6,12 @@ import { quoteSchema } from '@/lib/validation'
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? '127.0.0.1'
-  const { allowed } = rateLimit(ip, 5, 15 * 60 * 1000)
+  const { allowed, retryAfter } = await rateLimit(ip, 5, 15 * 60 * 1000)
   if (!allowed) {
-    return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 })
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } }
+    )
   }
 
   let body: unknown
