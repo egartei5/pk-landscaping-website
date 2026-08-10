@@ -5,8 +5,16 @@ import { env } from './env'
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
 
-export const db =
-  globalForPrisma.prisma ??
-  new PrismaClient(env.databaseUrl ? { datasources: { db: { url: env.databaseUrl } } } : undefined)
+// Two separate call sites rather than a ternary argument: PrismaClient's
+// options parameter is generic, and passing `Options | undefined` confuses
+// inference.
+function createClient(): PrismaClient {
+  if (env.databaseUrl) {
+    return new PrismaClient({ datasources: { db: { url: env.databaseUrl } } })
+  }
+  return new PrismaClient()
+}
+
+export const db = globalForPrisma.prisma ?? createClient()
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db

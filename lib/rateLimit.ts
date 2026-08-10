@@ -54,7 +54,11 @@ function memoryLimit(key: string, limit: number, windowMs: number): RateLimitRes
   if (!entry || entry.resetAt <= now) {
     memoryStore.set(key, { count: 1, resetAt: now + windowMs })
     if (memoryStore.size > 10_000) {
-      for (const [k, v] of memoryStore) if (v.resetAt <= now) memoryStore.delete(k)
+      // forEach rather than for...of: tsconfig has no `target`, so tsc
+      // typechecks against ES5 and refuses to iterate a Map directly.
+      memoryStore.forEach((v, k) => {
+        if (v.resetAt <= now) memoryStore.delete(k)
+      })
     }
     return { allowed: true, remaining: limit - 1, retryAfter: Math.ceil(windowMs / 1000) }
   }

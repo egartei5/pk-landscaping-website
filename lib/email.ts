@@ -16,7 +16,9 @@ const transporter = nodemailer.createTransport({
  * so an unconfigured mailbox must produce a loud, specific log line instead
  * of a vague connection error buried in a .catch().
  */
-async function send(options: nodemailer.SendMailOptions) {
+type MailOptions = Parameters<typeof transporter.sendMail>[0]
+
+async function send(options: MailOptions) {
   if (!env.emailConfigured) {
     console.error(
       `[email] NOT SENT — "${options.subject}". SMTP is not fully configured; ` +

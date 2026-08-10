@@ -39,8 +39,14 @@ const emailSchema = z.object({
 // missing runtime secret shouldn't fail the build.
 const isBuildPhase = process.env.NEXT_PHASE === 'phase-production-build'
 
-function formatIssues(error: z.ZodError): string {
-  return error.issues.map((i) => `  - ${i.path.join('.') || '(root)'}: ${i.message}`).join('\n')
+// Typed structurally rather than as z.ZodError so it doesn't depend on the
+// generic parameter, which differs between zod v3 and v4.
+type IssueList = { issues: ReadonlyArray<{ path: ReadonlyArray<PropertyKey>; message: string }> }
+
+function formatIssues(error: IssueList): string {
+  return error.issues
+    .map((i) => `  - ${i.path.map(String).join('.') || '(root)'}: ${i.message}`)
+    .join('\n')
 }
 
 function validate() {
