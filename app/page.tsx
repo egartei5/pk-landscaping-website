@@ -1,28 +1,28 @@
 import Script from 'next/script'
-import dynamic from 'next/dynamic'
+import dynamicImport from 'next/dynamic'
 import { db } from '@/lib/db'
 import { localBusinessSchema } from '@/lib/seo'
 import SceneWrapper from '@/components/motion/SceneWrapper'
 import HeroSection from '@/components/home/HeroSection'
 
 // Server components — code-split, still SSR'd
-const TrustStatsBar           = dynamic(() => import('@/components/home/TrustStatsBar'))
-const ServicesSection         = dynamic(() => import('@/components/home/ServicesSection'))
-const WhyChooseUs             = dynamic(() => import('@/components/home/WhyChooseUs'))
-const BeforeAfterSection      = dynamic(() => import('@/components/home/BeforeAfterSection'))
-const FeaturedProjects        = dynamic(() => import('@/components/home/FeaturedProjects'))
-const ContactCTA              = dynamic(() => import('@/components/home/ContactCTA'))
-const GoogleReviewsBanner     = dynamic(() => import('@/components/home/GoogleReviewsBanner'))
-const MaintenancePlansSection = dynamic(() => import('@/components/home/MaintenancePlansSection'))
-const ValuePropsSection       = dynamic(() => import('@/components/home/ValuePropsSection'))
-const HomeBookingSection      = dynamic(() => import('@/components/home/HomeBookingSection'))
-const ServiceAreasSection     = dynamic(() => import('@/components/home/ServiceAreasSection'))
-const BlogPreview             = dynamic(() => import('@/components/home/BlogPreview'))
+const TrustStatsBar           = dynamicImport(() => import('@/components/home/TrustStatsBar'))
+const ServicesSection         = dynamicImport(() => import('@/components/home/ServicesSection'))
+const WhyChooseUs             = dynamicImport(() => import('@/components/home/WhyChooseUs'))
+const BeforeAfterSection      = dynamicImport(() => import('@/components/home/BeforeAfterSection'))
+const FeaturedProjects        = dynamicImport(() => import('@/components/home/FeaturedProjects'))
+const ContactCTA              = dynamicImport(() => import('@/components/home/ContactCTA'))
+const GoogleReviewsBanner     = dynamicImport(() => import('@/components/home/GoogleReviewsBanner'))
+const MaintenancePlansSection = dynamicImport(() => import('@/components/home/MaintenancePlansSection'))
+const ValuePropsSection       = dynamicImport(() => import('@/components/home/ValuePropsSection'))
+const HomeBookingSection      = dynamicImport(() => import('@/components/home/HomeBookingSection'))
+const ServiceAreasSection     = dynamicImport(() => import('@/components/home/ServiceAreasSection'))
+const BlogPreview             = dynamicImport(() => import('@/components/home/BlogPreview'))
 
 // Client components — skip SSR, load only client-side
-const ProcessSection       = dynamic(() => import('@/components/home/ProcessSection'), { ssr: false })
-const TestimonialsCarousel = dynamic(() => import('@/components/home/TestimonialsCarousel'), { ssr: false })
-const DiscountBanner       = dynamic(() => import('@/components/home/DiscountBanner'), { ssr: false })
+const ProcessSection       = dynamicImport(() => import('@/components/home/ProcessSection'), { ssr: false })
+const TestimonialsCarousel = dynamicImport(() => import('@/components/home/TestimonialsCarousel'), { ssr: false })
+const DiscountBanner       = dynamicImport(() => import('@/components/home/DiscountBanner'), { ssr: false })
 
 export const dynamic = 'force-dynamic'
 
