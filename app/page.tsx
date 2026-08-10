@@ -24,7 +24,7 @@ const ProcessSection       = dynamic(() => import('@/components/home/ProcessSect
 const TestimonialsCarousel = dynamic(() => import('@/components/home/TestimonialsCarousel'), { ssr: false })
 const DiscountBanner       = dynamic(() => import('@/components/home/DiscountBanner'), { ssr: false })
 
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
   const [testimonials, posts] = await Promise.all([
