@@ -31,7 +31,7 @@ test('deliverEmail contains an error and returns false', async () => {
   }
 })
 
-test('deliverEmail stops waiting when an SMTP operation stalls', async () => {
+test('deliverEmail stops waiting when an email operation stalls', async () => {
   const original = console.error
   const messages: string[] = []
   console.error = (...args) => messages.push(args.join(' '))
