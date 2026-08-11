@@ -90,7 +90,7 @@ test('buildBookingWhatsAppUrl includes the selected appointment details', () => 
 Run:
 
 ```bash
-TS_NODE_COMPILER_OPTIONS='{"module":"CommonJS"}' node --test -r ts-node/register tests/whatsapp.test.ts
+TS_NODE_COMPILER_OPTIONS='{"module":"CommonJS","jsx":"react-jsx"}' node --test -r ts-node/register tests/whatsapp.test.ts
 ```
 
 Expected: FAIL with `Cannot find module '../lib/whatsapp'`.
@@ -323,7 +323,7 @@ test('buildFeedbackEmail includes customer feedback and escapes HTML', () => {
 Run:
 
 ```bash
-TS_NODE_COMPILER_OPTIONS='{"module":"CommonJS"}' node --test -r ts-node/register tests/email-notifications.test.ts
+TS_NODE_COMPILER_OPTIONS='{"module":"CommonJS","jsx":"react-jsx"}' node --test -r ts-node/register tests/email-notifications.test.ts
 ```
 
 Expected: FAIL because `lib/feedbackEmail.ts` and `lib/notificationDelivery.ts` do not exist.
@@ -479,12 +479,12 @@ The API still returns `{ success: true }` whether the notification returns `true
 Run:
 
 ```bash
-TS_NODE_COMPILER_OPTIONS='{"module":"CommonJS"}' node --test -r ts-node/register tests/*.test.ts
+TS_NODE_COMPILER_OPTIONS='{"module":"CommonJS","jsx":"react-jsx"}' node --test -r ts-node/register tests/*.test.ts
 npx tsc --noEmit
 npm run build
 ```
 
-Expected: 5 unit tests pass, TypeScript exits 0, and the production build exits 0.
+Expected: 12 unit tests pass, TypeScript exits 0, and the production build exits 0.
 
 - [ ] **Step 6: Commit the API wiring**
 

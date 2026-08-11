@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { rateLimit } from '@/lib/rateLimit'
-import { testimonialSchema } from '@/lib/validation'
+import { feedbackSubmissionSchema } from '@/lib/validation'
 import { sendFeedbackNotification } from '@/lib/email'
 import { deliverEmail } from '@/lib/notificationDelivery'
 
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 })
   }
 
-  const result = testimonialSchema.safeParse(body)
+  const result = feedbackSubmissionSchema.safeParse(body)
   if (!result.success) {
     return NextResponse.json({ error: 'Validation failed.', issues: result.error.issues }, { status: 422 })
   }

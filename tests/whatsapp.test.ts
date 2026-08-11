@@ -3,6 +3,7 @@ import test from 'node:test'
 import {
   buildBookingWhatsAppUrl,
   buildQuoteWhatsAppUrl,
+  createBookingSubmission,
 } from '../lib/whatsapp'
 
 function messageFrom(url: string) {
@@ -44,4 +45,25 @@ test('buildBookingWhatsAppUrl includes the selected appointment details', () => 
   assert.match(message ?? '', /2026-08-20/)
   assert.match(message ?? '', /9:00 AM – 11:00 AM/)
   assert.match(message ?? '', /Corner property/)
+})
+
+test('createBookingSubmission keeps the exact payload sent before later form edits', () => {
+  const form = {
+    name: 'Jane Doe',
+    phone: '(218) 555-0100',
+    email: 'jane@example.com',
+    location: 'Moorhead, MN',
+    notes: 'Corner property',
+  }
+  const submitted = createBookingSubmission(form, {
+    service: 'Snow Removal',
+    date: '2026-08-20',
+    timeSlot: '9:00 AM – 11:00 AM',
+  })
+
+  form.name = 'Edited While Waiting'
+  form.notes = 'Different notes'
+
+  assert.equal(submitted.name, 'Jane Doe')
+  assert.equal(submitted.notes, 'Corner property')
 })

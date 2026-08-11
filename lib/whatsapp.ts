@@ -20,6 +20,13 @@ export interface BookingWhatsAppData {
   notes?: string
 }
 
+export function createBookingSubmission(
+  form: Omit<BookingWhatsAppData, 'service' | 'date' | 'timeSlot'>,
+  appointment: Pick<BookingWhatsAppData, 'service' | 'date' | 'timeSlot'>
+): BookingWhatsAppData {
+  return { ...form, ...appointment }
+}
+
 function whatsappUrl(lines: string[]) {
   const url = new URL(`https://wa.me/${WHATSAPP_NUMBER}`)
   url.searchParams.set('text', lines.filter(Boolean).join('\n'))

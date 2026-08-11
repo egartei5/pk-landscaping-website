@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'
 import { env } from './env'
 import { buildFeedbackEmail, type FeedbackEmailData } from './feedbackEmail'
+import { SMTP_TRANSPORT_TIMEOUTS } from './emailTransport'
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -10,6 +11,7 @@ const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
+  ...SMTP_TRANSPORT_TIMEOUTS,
 })
 
 /**

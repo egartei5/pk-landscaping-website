@@ -23,16 +23,19 @@ export type BlogPostInput = z.infer<typeof blogPostSchema>
 
 export const testimonialSchema = z.object({
   name: z.string().min(2).max(100),
-  email: z.union([
-    z.string().email('Please enter a valid email address'),
-    z.literal(''),
-  ]).optional(),
   rating: z.number().int().min(1).max(5),
   review: z.string().min(10).max(1000),
   service: z.string().optional(),
 })
 
 export type TestimonialInput = z.infer<typeof testimonialSchema>
+
+export const feedbackSubmissionSchema = testimonialSchema.extend({
+  email: z.union([
+    z.string().email('Please enter a valid email address'),
+    z.literal(''),
+  ]).optional(),
+})
 
 export const galleryImageSchema = z.object({
   url: z.string().url('Must be a valid URL'),

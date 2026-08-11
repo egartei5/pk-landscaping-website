@@ -2,7 +2,11 @@
 import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight, CheckCircle, Clock, Calendar, Wrench, User } from 'lucide-react'
 import WhatsAppHandoff from '@/components/ui/WhatsAppHandoff'
-import { buildBookingWhatsAppUrl } from '@/lib/whatsapp'
+import {
+  buildBookingWhatsAppUrl,
+  createBookingSubmission,
+  type BookingWhatsAppData,
+} from '@/lib/whatsapp'
 
 const TIME_SLOTS = [
   '7:00 AM – 9:00 AM',
@@ -47,7 +51,7 @@ export default function BookingForm() {
   const [form, setForm] = useState({ name: '', phone: '', email: '', location: '', notes: '' })
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
-  const [done, setDone] = useState(false)
+  const [submittedData, setSubmittedData] = useState<BookingWhatsAppData | null>(null)
 
   useEffect(() => {
     if (!selectedDate) return
@@ -80,15 +84,20 @@ export default function BookingForm() {
     if (!form.name || !form.email) { setError('Name and email are required.'); return }
     setSubmitting(true)
     setError('')
+    const payload = createBookingSubmission(form, {
+      service,
+      date: selectedDate,
+      timeSlot: selectedSlot,
+    })
     try {
       const res = await fetch('/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, service, date: selectedDate, timeSlot: selectedSlot }),
+        body: JSON.stringify(payload),
       })
       const data = await res.json()
       if (!res.ok) { setError(data.error ?? 'Failed to submit.'); return }
-      setDone(true)
+      setSubmittedData(payload)
     } catch {
       setError('Something went wrong. Please call (218) 979-1154.')
     } finally {
@@ -96,13 +105,8 @@ export default function BookingForm() {
     }
   }
 
-  if (done) {
-    const whatsappUrl = buildBookingWhatsAppUrl({
-      ...form,
-      service,
-      date: selectedDate,
-      timeSlot: selectedSlot,
-    })
+  if (submittedData) {
+    const whatsappUrl = buildBookingWhatsAppUrl(submittedData)
 
     return (
       <div className="bg-pk-900 border border-pk-700 rounded-3xl p-12 text-center max-w-lg mx-auto">
@@ -110,9 +114,9 @@ export default function BookingForm() {
         <h2 className="font-heading font-black text-white text-2xl mb-2">Booking Request Sent!</h2>
         <p className="text-gray-400 mb-4">We&apos;ll review your request and send you a confirmation email within a few hours.</p>
         <div className="bg-pk-800 rounded-xl p-4 text-left space-y-1 text-sm mb-6">
-          <p className="text-gray-400"><span className="text-white font-semibold">Service:</span> {service}</p>
-          <p className="text-gray-400"><span className="text-white font-semibold">Date:</span> {formatDisplayDate(selectedDate)}</p>
-          <p className="text-gray-400"><span className="text-white font-semibold">Time:</span> {selectedSlot}</p>
+          <p className="text-gray-400"><span className="text-white font-semibold">Service:</span> {submittedData.service}</p>
+          <p className="text-gray-400"><span className="text-white font-semibold">Date:</span> {formatDisplayDate(submittedData.date)}</p>
+          <p className="text-gray-400"><span className="text-white font-semibold">Time:</span> {submittedData.timeSlot}</p>
         </div>
         <WhatsAppHandoff href={whatsappUrl} />
         <p className="mt-3 text-xs text-gray-500">WhatsApp will open with your request ready to review and send.</p>
