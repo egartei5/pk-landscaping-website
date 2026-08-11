@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer'
 import { env } from './env'
 import { buildFeedbackEmail, type FeedbackEmailData } from './feedbackEmail'
 import { SMTP_TRANSPORT_TIMEOUTS } from './emailTransport'
+import { sendResendEmail } from './resendEmail'
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -19,16 +20,27 @@ const transporter = nodemailer.createTransport({
  * so an unconfigured mailbox must produce a loud, specific log line instead
  * of a vague connection error buried in a .catch().
  */
-type MailOptions = Parameters<typeof transporter.sendMail>[0]
+type MailOptions = {
+  from: string
+  to: string | string[]
+  subject: string
+  html: string
+}
 
 async function send(options: MailOptions) {
-  if (!env.emailConfigured) {
+  if (!env.emailConfigured || !env.emailProvider) {
     console.error(
-      `[email] NOT SENT — "${options.subject}". SMTP is not fully configured; ` +
-        'check SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS and NOTIFICATION_EMAIL.'
+      `[email] NOT SENT — "${options.subject}". Email delivery is not fully configured; ` +
+        'check the Resend HTTPS or SMTP fallback variables.'
     )
-    throw new Error('SMTP is not fully configured')
+    throw new Error('Email delivery is not fully configured')
   }
+
+  if (env.emailProvider === 'resend') {
+    await sendResendEmail(process.env.RESEND_API_KEY ?? '', options)
+    return
+  }
+
   await transporter.sendMail(options)
 }
 
@@ -40,8 +52,8 @@ export async function sendQuoteNotification(data: {
   message: string
 }) {
   await send({
-    from: `"PK Landscaping Website" <${process.env.SMTP_USER}>`,
-    to: process.env.NOTIFICATION_EMAIL,
+    from: `"PK Landscaping Website" <${env.emailFrom}>`,
+    to: env.notificationEmail,
     subject: `New Quote Request from ${data.name}`,
     html: `
       <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
@@ -62,8 +74,8 @@ export async function sendQuoteNotification(data: {
 export async function sendFeedbackNotification(data: FeedbackEmailData) {
   const content = buildFeedbackEmail(data)
   await send({
-    from: `"PK Landscaping Website" <${process.env.SMTP_USER}>`,
-    to: process.env.NOTIFICATION_EMAIL,
+    from: `"PK Landscaping Website" <${env.emailFrom}>`,
+    to: env.notificationEmail,
     ...content,
   })
 }
@@ -76,7 +88,7 @@ export async function sendBookingConfirmationToCustomer(data: {
   timeSlot: string
 }) {
   await send({
-    from: `"PK Landscaping" <${process.env.SMTP_USER}>`,
+    from: `"PK Landscaping" <${env.emailFrom}>`,
     to: data.email,
     subject: `Booking Request Received — PK Landscaping`,
     html: `
@@ -105,7 +117,7 @@ export async function sendBookingStatusEmail(data: {
 }) {
   const accepted = data.status === 'accepted'
   await send({
-    from: `"PK Landscaping" <${process.env.SMTP_USER}>`,
+    from: `"PK Landscaping" <${env.emailFrom}>`,
     to: data.email,
     subject: accepted
       ? `✅ Booking Confirmed — ${data.date}`
@@ -145,8 +157,8 @@ export async function sendBookingAlertToAdmin(data: {
   notes?: string | null
 }) {
   await send({
-    from: `"PK Landscaping Website" <${process.env.SMTP_USER}>`,
-    to: process.env.NOTIFICATION_EMAIL,
+    from: `"PK Landscaping Website" <${env.emailFrom}>`,
+    to: env.notificationEmail,
     subject: `📅 New Booking Request — ${data.date} at ${data.timeSlot}`,
     html: `
       <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">

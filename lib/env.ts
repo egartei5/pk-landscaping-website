@@ -1,12 +1,12 @@
 import { z } from 'zod'
+import { resolveEmailConfiguration } from './emailConfiguration'
 
 /**
  * Startup environment validation.
  *
  * Previously a missing DATABASE_URL crashed every page at request time with
- * an opaque Prisma error, and missing SMTP settings failed silently because
- * notification emails are fire-and-forget. This module surfaces both classes
- * of problem at boot instead.
+ * an opaque Prisma error, and missing email settings failed silently. This
+ * module surfaces both classes of problem at boot instead.
  *
  * Fatal vars abort the process. Optional-but-important vars (email delivery)
  * only log a loud warning, so a misconfigured mailbox can never take the
@@ -25,14 +25,6 @@ const fatalSchema = z.object({
   NEXTAUTH_SECRET: z
     .string()
     .min(16, 'NEXTAUTH_SECRET must be at least 16 characters (generate with: openssl rand -base64 32)'),
-})
-
-const emailSchema = z.object({
-  SMTP_HOST: z.string().min(1),
-  SMTP_PORT: z.string().regex(/^\d+$/, 'SMTP_PORT must be a number'),
-  SMTP_USER: z.string().min(1),
-  SMTP_PASS: z.string().min(1),
-  NOTIFICATION_EMAIL: z.string().min(3).includes('@', { message: 'NOTIFICATION_EMAIL must be an email address' }),
 })
 
 // During `next build` the app is only being compiled, not served, so a
@@ -60,10 +52,11 @@ function validate() {
     }
   }
 
-  const email = emailSchema.safeParse(process.env)
-  if (!email.success) {
+  const email = resolveEmailConfiguration(process.env)
+  if (!email) {
     console.warn(
-      `[env] Email delivery is not fully configured — quote and booking notifications will not be sent:\n${formatIssues(email.error)}`
+      '[env] Email delivery is not fully configured — set Resend HTTPS variables ' +
+        '(RESEND_API_KEY, RESEND_FROM_EMAIL, NOTIFICATION_EMAIL) or the SMTP fallback variables.'
     )
   }
 
@@ -74,7 +67,10 @@ function validate() {
   return {
     databaseUrl: process.env.DATABASE_URL ?? '',
     nextAuthSecret: process.env.NEXTAUTH_SECRET ?? '',
-    emailConfigured: email.success,
+    emailConfigured: Boolean(email),
+    emailProvider: email?.provider ?? null,
+    emailFrom: email?.from ?? '',
+    notificationEmail: email?.notificationEmail ?? '',
     redisUrl: process.env.REDIS_URL ?? null,
   }
 }

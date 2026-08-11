@@ -11,8 +11,8 @@ Notifications will go automatically to `contact@pklandscapingmn.com`. After a su
 - Quote requests are validated and saved as `Lead` records through `/api/quote`.
 - Bookings are validated, checked for conflicts, and saved as `Booking` records through `/api/bookings`.
 - Feedback is validated and saved as `Testimonial` records through `/api/feedback`.
-- Quote and booking routes already attempt email delivery using SMTP settings in Railway.
-- Railway already has `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, and `NOTIFICATION_EMAIL`; the notification and SMTP account addresses match `contact@pklandscapingmn.com`.
+- Quote and booking routes originally attempted email delivery using SMTP settings in Railway.
+- Production verification proved the Railway workspace is on Hobby, where outbound SMTP is blocked. The configured Gmail SMTP connection therefore times out even though its host, port, user, password, and notification address are present.
 - Existing admin pages provide a database-backed inbox for leads and bookings.
 - The site already uses `+1 (218) 979-1154` for its floating WhatsApp link.
 
@@ -25,6 +25,8 @@ Use a database-first hybrid notification flow:
 3. Send an automatic email notification to `contact@pklandscapingmn.com`.
 4. Return a successful response once the database save succeeds, even if email delivery encounters a temporary problem.
 5. Show an optional WhatsApp button after successful quote and booking submissions. The button opens WhatsApp to `+1 (218) 979-1154` with a prefilled summary; the customer reviews and taps Send.
+
+Automatic email uses Resend's HTTPS API as the production transport because HTTPS is supported on Railway Hobby. SMTP remains an optional fallback for local development or a future host/plan that permits outbound SMTP. Resend is selected whenever `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, and `NOTIFICATION_EMAIL` are all configured.
 
 This does not use the Meta WhatsApp Business API. Websites cannot silently send a WhatsApp message on a customer's behalf through a normal `wa.me` link.
 
@@ -53,7 +55,7 @@ This does not use the Meta WhatsApp Business API. Websites cannot silently send 
 ## Reliability and Error Handling
 
 - A notification failure must never discard a successfully saved customer request.
-- Server logs must record notification failures without logging SMTP credentials or other secrets.
+- Server logs must record notification failures without logging Resend API keys, SMTP credentials, or other secrets.
 - The client should only show success after the server confirms the database write.
 - WhatsApp message text must be URL-encoded and built only from the successful form submission.
 - Existing validation, rate limiting, booking-conflict checks, admin pages, services, database, domain routing, and apex forwarding must remain unchanged.
@@ -61,7 +63,7 @@ This does not use the Meta WhatsApp Business API. Websites cannot silently send 
 
 ## Verification
 
-- Verify the live SMTP connection without revealing credentials.
+- Verify Resend domain authentication and a live HTTPS API delivery without revealing credentials.
 - Submit controlled test data through each form.
 - Confirm each test record appears in the database/admin view.
 - Confirm quote, booking, and feedback notifications arrive at `contact@pklandscapingmn.com`.

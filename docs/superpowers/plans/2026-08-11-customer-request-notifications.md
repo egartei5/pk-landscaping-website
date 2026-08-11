@@ -4,9 +4,9 @@
 
 **Goal:** Reliably save every customer submission, automatically email it to `contact@pklandscapingmn.com`, and offer quote and booking customers a prefilled WhatsApp handoff to `+1 (218) 979-1154`.
 
-**Architecture:** Keep PostgreSQL as the source of truth and make email delivery a bounded, awaited, best-effort step after each successful database write. Put message formatting in small pure helpers that can be unit tested without SMTP or a browser, then use a shared WhatsApp action component on the quote and booking success screens.
+**Architecture:** Keep PostgreSQL as the source of truth and make email delivery a bounded, awaited, best-effort step after each successful database write. Use Resend's HTTPS API in Railway production because the Hobby plan blocks SMTP, while retaining SMTP as an optional fallback. Put message formatting and provider boundaries in small pure helpers that can be unit tested without an external mail server or browser, then use a shared WhatsApp action component on the quote and booking success screens.
 
-**Tech Stack:** Next.js 14 App Router, React 18, TypeScript 5, Prisma/PostgreSQL, Nodemailer SMTP, Zod, Node built-in test runner with `ts-node`.
+**Tech Stack:** Next.js 14 App Router, React 18, TypeScript 5, Prisma/PostgreSQL, Resend HTTPS API, optional Nodemailer SMTP fallback, Zod, Node built-in test runner with `ts-node`.
 
 ## Global Constraints
 
