@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 import { env } from './env'
+import { buildFeedbackEmail, type FeedbackEmailData } from './feedbackEmail'
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -24,7 +25,7 @@ async function send(options: MailOptions) {
       `[email] NOT SENT — "${options.subject}". SMTP is not fully configured; ` +
         'check SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS and NOTIFICATION_EMAIL.'
     )
-    return
+    throw new Error('SMTP is not fully configured')
   }
   await transporter.sendMail(options)
 }
@@ -53,6 +54,15 @@ export async function sendQuoteNotification(data: {
         <p style="color:#888;font-size:12px;margin-top:24px;">Sent from pklandscapingmn.com</p>
       </div>
     `,
+  })
+}
+
+export async function sendFeedbackNotification(data: FeedbackEmailData) {
+  const content = buildFeedbackEmail(data)
+  await send({
+    from: `"PK Landscaping Website" <${process.env.SMTP_USER}>`,
+    to: process.env.NOTIFICATION_EMAIL,
+    ...content,
   })
 }
 
