@@ -1,6 +1,8 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight, CheckCircle, Clock, Calendar, Wrench, User } from 'lucide-react'
+import WhatsAppHandoff from '@/components/ui/WhatsAppHandoff'
+import { buildBookingWhatsAppUrl } from '@/lib/whatsapp'
 
 const TIME_SLOTS = [
   '7:00 AM – 9:00 AM',
@@ -95,6 +97,13 @@ export default function BookingForm() {
   }
 
   if (done) {
+    const whatsappUrl = buildBookingWhatsAppUrl({
+      ...form,
+      service,
+      date: selectedDate,
+      timeSlot: selectedSlot,
+    })
+
     return (
       <div className="bg-pk-900 border border-pk-700 rounded-3xl p-12 text-center max-w-lg mx-auto">
         <CheckCircle size={56} className="text-pk-500 mx-auto mb-4" />
@@ -105,7 +114,9 @@ export default function BookingForm() {
           <p className="text-gray-400"><span className="text-white font-semibold">Date:</span> {formatDisplayDate(selectedDate)}</p>
           <p className="text-gray-400"><span className="text-white font-semibold">Time:</span> {selectedSlot}</p>
         </div>
-        <p className="text-gray-500 text-sm">Questions? Call <a href="tel:+12189791154" className="text-pk-400 font-semibold">(218) 979-1154</a></p>
+        <WhatsAppHandoff href={whatsappUrl} />
+        <p className="mt-3 text-xs text-gray-500">WhatsApp will open with your request ready to review and send.</p>
+        <p className="mt-4 text-gray-500 text-sm">Questions? Call <a href="tel:+12189791154" className="text-pk-400 font-semibold">(218) 979-1154</a></p>
       </div>
     )
   }
