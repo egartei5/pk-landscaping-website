@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { rateLimit } from '@/lib/rateLimit'
 import { sendBookingAlertToAdmin, sendBookingConfirmationToCustomer } from '@/lib/email'
+import { deliverEmail } from '@/lib/notificationDelivery'
 import { z } from 'zod'
 
 const bookingSchema = z.object({
@@ -53,14 +54,18 @@ export async function POST(req: NextRequest) {
 
   const booking = await db.booking.create({ data })
 
-  sendBookingAlertToAdmin(booking).catch(console.error)
-  sendBookingConfirmationToCustomer({
-    name: booking.name,
-    email: booking.email,
-    service: booking.service,
-    date: booking.date,
-    timeSlot: booking.timeSlot,
-  }).catch(console.error)
+  await Promise.all([
+    deliverEmail('booking admin notification', () => sendBookingAlertToAdmin(booking)),
+    deliverEmail('booking customer confirmation', () =>
+      sendBookingConfirmationToCustomer({
+        name: booking.name,
+        email: booking.email,
+        service: booking.service,
+        date: booking.date,
+        timeSlot: booking.timeSlot,
+      })
+    ),
+  ])
 
   return NextResponse.json({ success: true, id: booking.id })
 }

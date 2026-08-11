@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { rateLimit } from '@/lib/rateLimit'
 import { sendQuoteNotification } from '@/lib/email'
+import { deliverEmail } from '@/lib/notificationDelivery'
 import { quoteSchema } from '@/lib/validation'
 
 export async function POST(req: NextRequest) {
@@ -35,9 +36,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to submit. Please call us directly.' }, { status: 500 })
   }
 
-  // Email notification is best-effort — don't fail the request if SMTP isn't configured
-  sendQuoteNotification({ name, phone, email, service, message }).catch((err) =>
-    console.error('Email notification error:', err)
+  await deliverEmail('quote notification', () =>
+    sendQuoteNotification({ name, phone, email, service, message })
   )
 
   return NextResponse.json({ success: true })

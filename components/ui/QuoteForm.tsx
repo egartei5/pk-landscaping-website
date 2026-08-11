@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Send, CheckCircle } from 'lucide-react'
+import WhatsAppHandoff from './WhatsAppHandoff'
+import { buildQuoteWhatsAppUrl } from '@/lib/whatsapp'
 
 const schema = z.object({
   name: z.string().min(2, 'Name is required'),
@@ -31,7 +33,7 @@ interface QuoteFormProps {
 }
 
 export default function QuoteForm({ dark = false }: QuoteFormProps) {
-  const [submitted, setSubmitted] = useState(false)
+  const [submittedData, setSubmittedData] = useState<FormData | null>(null)
   const [error, setError] = useState('')
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormData>({ resolver: zodResolver(schema) })
 
@@ -48,18 +50,21 @@ export default function QuoteForm({ dark = false }: QuoteFormProps) {
     try {
       const res = await fetch('/api/quote', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       if (!res.ok) throw new Error('Failed')
-      setSubmitted(true)
+      setSubmittedData(data)
     } catch {
       setError('Something went wrong. Please call us at (218) 979-1154.')
     }
   }
 
-  if (submitted) {
+  if (submittedData) {
+    const whatsappUrl = buildQuoteWhatsAppUrl(submittedData)
     return (
       <div className="flex flex-col items-center justify-center py-12 gap-4 text-center">
         <CheckCircle size={48} className="text-pk-500" />
         <h3 className={`font-heading font-bold text-xl ${dark ? 'text-white' : 'text-gray-900'}`}>Request Received!</h3>
         <p className={`text-sm ${dark ? 'text-gray-400' : 'text-gray-600'}`}>We&apos;ll get back to you within one business day.</p>
+        <WhatsAppHandoff href={whatsappUrl} />
+        <p className="text-xs text-gray-500">WhatsApp will open with your request ready to review and send.</p>
       </div>
     )
   }

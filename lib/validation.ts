@@ -30,6 +30,13 @@ export const testimonialSchema = z.object({
 
 export type TestimonialInput = z.infer<typeof testimonialSchema>
 
+export const feedbackSubmissionSchema = testimonialSchema.extend({
+  email: z.union([
+    z.string().email('Please enter a valid email address'),
+    z.literal(''),
+  ]).optional(),
+})
+
 export const galleryImageSchema = z.object({
   url: z.string().url('Must be a valid URL'),
   alt: z.string().min(3).max(200),
