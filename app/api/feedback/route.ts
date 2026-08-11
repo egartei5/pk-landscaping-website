@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { rateLimit } from '@/lib/rateLimit'
 import { testimonialSchema } from '@/lib/validation'
+import { sendFeedbackNotification } from '@/lib/email'
+import { deliverEmail } from '@/lib/notificationDelivery'
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? '127.0.0.1'
@@ -25,7 +27,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Validation failed.', issues: result.error.issues }, { status: 422 })
   }
 
-  const { name, rating, review, service } = result.data
+  const { name, email, rating, review, service } = result.data
 
   try {
     await db.testimonial.create({
@@ -35,6 +37,10 @@ export async function POST(req: NextRequest) {
     console.error('Feedback save error:', err)
     return NextResponse.json({ error: 'Failed to submit. Please call us directly.' }, { status: 500 })
   }
+
+  await deliverEmail('feedback notification', () =>
+    sendFeedbackNotification({ name, email, rating, service, review })
+  )
 
   return NextResponse.json({ success: true })
 }
