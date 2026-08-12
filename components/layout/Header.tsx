@@ -31,7 +31,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
-  const pathname = usePathname()
+  const pathname = usePathname() ?? ''
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)

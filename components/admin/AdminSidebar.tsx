@@ -14,7 +14,7 @@ const nav = [
 ]
 
 export default function AdminSidebar() {
-  const pathname = usePathname()
+  const pathname = usePathname() ?? ''
 
   function isActive(href: string, exact?: boolean) {
     return exact ? pathname === href : pathname.startsWith(href)
