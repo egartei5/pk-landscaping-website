@@ -3,6 +3,7 @@ import { Phone, MapPin, Clock, Mail } from 'lucide-react'
 import SectionLabel from '@/components/ui/SectionLabel'
 import QuoteCTASection from '@/components/ui/QuoteCTASection'
 import { buildMetadata } from '@/lib/seo'
+import { FACEBOOK_URL } from '@/lib/social-links'
 
 export const metadata: Metadata = buildMetadata({
   title: 'Contact Us',
@@ -71,6 +72,24 @@ export default function ContactPage() {
                       <p className="text-xs text-gray-500 uppercase tracking-widest mb-0.5">Email</p>
                       <p className="text-gray-600 text-sm">Fill out the form — we respond within one business day</p>
                     </div>
+                  </li>
+                  <li>
+                    <a
+                      href={FACEBOOK_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start gap-3 group"
+                    >
+                      <div className="w-10 h-10 bg-pk-500/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-blue-500/20 transition-colors">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-pk-500" aria-hidden="true">
+                          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 uppercase tracking-widest mb-0.5">Facebook</p>
+                        <p className="font-bold text-pk-900 group-hover:text-blue-600 transition-colors">Follow us on Facebook</p>
+                      </div>
+                    </a>
                   </li>
                 </ul>
               </div>
